@@ -32,7 +32,7 @@ read_nif=:3 :0
 read_block=: 3 :0
   type=. read_string''
   type build_reader
-  ".'read_',type,''''''
+  (type;'type'),.".'read_',type,''''''
 )
 
 build_reader=: 1 :0
