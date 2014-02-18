@@ -12,3 +12,7 @@ Version hardcoded to Morrowind
 Files should go in obvious locations in J user directory
 
 (Polish must wait until after functionality.)
+
+---------------------------------------------------------
+
+parsed nif file currently appears as DATANIF_readnif_ and the orcish table example is automatically parsed when readnif.ijs is loaded.
