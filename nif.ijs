@@ -10,7 +10,6 @@ require '~user/nifxml.ijs'
 coinsert 'nifxml' NB. for cond expressions
 
 NB. extract crude definition from nif.xml 
-process_nifxml_  fread '~user/nif.xml'
 getdef=: extract_nifxml_
 
 lr_z_=:3 :'5!:5 <''y'''
