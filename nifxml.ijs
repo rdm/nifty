@@ -20,7 +20,7 @@ NIFNames=: ''
 NIFMembers=: ''
 
 extract=:3 :0
-  if. 0=#NIFNames do. process_nifxml_ fread '~user/nif.xml' end.
+  if. 0=#NIFNames do. process_nifxml_ fread jpath '~user/nif.xml' end.
   restrictVersion&> ($~ $-.1:)NIFMembers {~ NIFNames i.;: y
 :
   Version_nifexpr_=: vton ::] x

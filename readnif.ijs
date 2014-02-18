@@ -51,8 +51,6 @@ build_reader=: 1 :0
 build_compound=:1 :0
   'base overview detail'=. extract_nifxml_ m
   def=. '  r=. i.2 0',LF
-  if. 'enum'-: base do.
-  end.
   if. #inherit=. ;(#~ e.&(<'inherit'))~/|:overview do.
     def=. '  readinherit r=. read_',(inherit),'''''',LF
     inherit build_reader
@@ -260,5 +258,5 @@ BSNumUVSets=: 0
 
 NB. ------------------ test on load
 
-0 0 $ read_nif '~user\furniture\unpack\Furn_OrcLC_Table01.nif'
+0 0 $ read_nif jpath '~user\furniture\unpack\Furn_OrcLC_Table01.nif'
 NB. needs file from http://www.nexusmods.com/morrowind/mods/42513/

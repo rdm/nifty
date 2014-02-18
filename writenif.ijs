@@ -24,9 +24,41 @@ write_nif=:4 :0
 )
 
 write_block=:3 :0
-  smoutput $y
+  type=. 'type' get y
+  type build_writer
+  ".'write_',type,' y'
 )
 
+build_writer=:1 :0
+  type=. m
+  writer=. 'writer_',type
+  if. 3 = nc <writer do. writer return. end.
+  'base overview detail'=. extract_nifxml_ m
+  select. 0{::,base
+    case. 'compound' do. m build_compound
+    case. 'enum'     do. m build_enum
+    case. 'niobject' do. m build_compound
+    case.            do. assert. 0-:'fail' [smoutput m
+  end.
+)
+
+build_compound=:1 :0
+  'base overview detail'=. extract_nifxml_ m
+  def=. '  assert. (-: ~.){:y'
+  if. #inherit=. ;(#~ e.&(<'inherit'))~/|:overview do.
+    def=. '  write_',(inherit),' y',LF
+    inherit build_writer
+  end.
+  for_add. detail do.
+    recipe=. |:1 {::,>add
+    type=. ;(#~ e.&(<'type'))~/recipe
+    type build_writer
+    label=. ' '-.~;(#~ e.&(<'name'))~/recipe
+    def=. def,'  write_',type,' ''',label,''' get y'
+  end.
+  smoutput '''',m,''' defwr (3 :0)',LF,def,')',LF
+  m defwr (3 :def) 
+)
 
 NB. basic writers
 
@@ -63,4 +95,4 @@ NB. a literal value (an arbitrary number)
 
 NB. test on load
 require '~user/readnif.ijs'
-DATANIF_readnif_ write_nif '~user/testout.nif'
+DATANIF_readnif_ write_nif jpath '~user/testout.nif'
