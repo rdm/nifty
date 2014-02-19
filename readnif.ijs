@@ -23,9 +23,12 @@ read_nif=:3 :0
   assert. vers = Version
   version=. vers
   numblocks=. read_int ''
-  DATANIF=: (<(".&.> ,: ]) ;:'headerstring version numblocks'),:<'Header'
+  h=. ,.headerstring;0;'headerstring'
+  h=. h,.version;40;'version'
+  h=. h,.numblocks;44;'numblocks'
+  DATANIF=: ,.h;0;'Header'
   for_block.i. numblocks do.
-    DATANIF=: DATANIF,.(read_block block);block
+    DATANIF=: DATANIF,.(read_block block);POS;block
   end.
 )
 

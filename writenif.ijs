@@ -4,15 +4,27 @@ cocurrent 'writenif'
 erase names''
 
 get=: ({:@] i. ($~ $ -.1:)@;:@[) >@{ {.@]
+get=:4 :0
+  WRITENIF_base_=: WRITENIF
+  X_base_=: x
+  Y_base_=: y
+  nm=. ($~ $ -.1:)@;: x
+  vals=. {. y
+  smoutput ndx=. ({: y) i. nm
+  assert. (#WRITENIF) -: ndx {:: 1 { y
+  > ndx { vals
+)
+
 put=: 3 :0
   0 0$WRITENIF=:WRITENIF,,y
 )
 
 write_nif=:4 :0
   assert. (-: 'Header';]&.>@i.@<:@#) {: x
+  WRITENIF=: ''
   Header=. 'Header' get x
   assert. (;:'headerstring version numblocks') -: {: Header
-  WRITENIF=: 'headerstring' get Header
+  write_char 'headerstring' get Header
   write_int 'version' get Header
   write_int 'numblocks' get Header
   Data=. }.{.x
