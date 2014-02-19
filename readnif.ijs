@@ -30,6 +30,8 @@ read_nif=:3 :0
   for_block.i. numblocks do.
     DATANIF=: DATANIF,.(read_block block);POS;block
   end.
+  'Footer' build_compound
+  DATANIF=: DATANIF,.(read_Footer '');POS;'Footer'
 )
 
 read_block=: 3 :0

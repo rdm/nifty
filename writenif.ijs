@@ -20,7 +20,7 @@ put=: 3 :0
 )
 
 write_nif=:4 :0
-  assert. (-: 'Header';]&.>@i.@<:@#) {: x
+  assert. ('Header';(<"0 i._2+{:$x),<'Footer') -: {: x
   WRITENIF=: ''
   Header=. 'Header' get x
   assert. (;:'headerstring version numblocks') -: {: Header
@@ -28,9 +28,11 @@ write_nif=:4 :0
   write_int 'version' get Header
   write_int 'numblocks' get Header
   Data=. }.{.x
-  for_block. >}.{:x do.
+  for_block. >}:}.{:x do.
     write_block block{::Data
   end.
+  'Footer' build_compound
+  _ write_Footer 'Footer' get x
   WRITENIF fwrite y
   i.0 0
 )
