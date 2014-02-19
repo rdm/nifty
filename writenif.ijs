@@ -133,7 +133,7 @@ NB. special case code (needed to match special case read code) -----
   _ write_NiGeometryData y
 :
   if. 0=#y do. return. end.
-  write_NiObject y  
+  x write_NiObject y
   write_ushort 'NumVertices' get y NB. avoid NiPSysData bogosity
   write_bool 'HasVertices' get y
   write_Vector3 'Vertices' get y
