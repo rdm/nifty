@@ -38,7 +38,7 @@ write_nif=:4 :0
 write_block=:3 :0
   type=. 'type' get y
   type build_writer
-  ".'write_',type,' y'
+  ".'''',type,''' write_',type,' y'
 )
 
 build_writer=:1 :0
@@ -56,7 +56,7 @@ build_writer=:1 :0
 
 build_compound=:1 :0
   'base overview detail'=. extract_nifxml_ m
-  def=. '  ''',m,''' write_',m,' y',LF
+  def=. '  _ write_',m,' y',LF
   def=. def,':',LF
   def=. def,'  if. 0=#y do. return. end.',LF
   if. #inherit=. ;(#~ e.&(<'inherit'))~/|:overview do.
@@ -123,13 +123,14 @@ NB. a literal value (an arbitrary number)
 NB. special case code (needed to match special case read code) -----
 
 'SizedString' defwr (3 :0)
+  if. _ -: y do. return. end.
   write_int #y
   write_char y
 )
 'string' defwr (write_SizedString L:0)
 
 'NiGeometryData' defwr (3 :0)
-  'NiGeometryData' write_NiGeometryData y
+  _ write_NiGeometryData y
 :
   if. 0=#y do. return. end.
   write_NiObject y  
