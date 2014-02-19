@@ -111,7 +111,7 @@ fc=: 3!:5
 NB. bools have a dual existence:
 NB. a true/false value (a count - 0 or 1 times)
 NB. a literal value (an arbitrary number)
-'bool' defwr (2&ic@:({:"1))
+'bool' defWRITE (2&ic@:({:"1))
 
 'Ptr' defwr write_int
 'Ref' defwr write_int
@@ -152,8 +152,8 @@ NB. special case code (needed to match special case read code) -----
 'Color4' defwr write_float
 'Triangle' defwr write_ushort
 'Vector3' defwr write_float
-'Matrix33' defwr (write_float@|:@$~&3 3\~&_9^:(0<#))
-'Matrix22' defwr (write_float@|:@$~&2 2\~&_4^:(0<#))
+'Matrix33' defwr (write_float@|:^:(0<#))
+'Matrix22' defwr (write_float@|:^:(0<#))
 
 NB. test on load
 require '~user/readnif.ijs'

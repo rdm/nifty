@@ -33,9 +33,10 @@ read_nif=:3 :0
 )
 
 read_block=: 3 :0
+  p=. POS
   type=. read_string''
   type build_reader
-  (,.".'read_',type,''''''),.~type;POS;'type'
+  (,.".'read_',type,''''''),.~type;p;'type'
 )
 
 build_reader=: 1 :0
