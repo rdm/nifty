@@ -44,11 +44,15 @@ build_writer=:1 :0
 
 build_compound=:1 :0
   'base overview detail'=. extract_nifxml_ m
-  if=. 'if. 0=#y do. return. end.',LF
-  def=. if,'  assert. (-: ~.){:y',LF
+  def=. '  ''',m,''' write_',m,' y',LF
+  def=. def,':',LF
+  def=. def,'  if. 0=#y do. return. end.',LF
   if. #inherit=. ;(#~ e.&(<'inherit'))~/|:overview do.
-    def=. if,'  write_',(inherit),' y',LF
+    def=. def,'  x write_',(inherit),' y',LF
     inherit build_writer
+  else.
+    def=. def,'  assert. (-: ~.){:y',LF
+    def=. def,'  write_string x',LF
   end.
   for_add. detail do.
     recipe=. |:1 {::,>add
@@ -97,7 +101,6 @@ NB. a true/false value (a count - 0 or 1 times)
 NB. a literal value (an arbitrary number)
 'bool' defwr (2&ic@:({:"1))
 
-'NiObject' defwr (''"_)
 'Ptr' defwr write_int
 'Ref' defwr write_int
 'short' defWRITE (1&ic@,)
@@ -114,6 +117,9 @@ NB. special case code (needed to match special case read code) -----
 'string' defwr (write_SizedString L:0)
 
 'NiGeometryData' defwr (3 :0)
+  'NiGeometryData' write_NiGeometryData y
+:
+  if. 0=#y do. return. end.
   write_NiObject y  
   write_ushort 'NumVertices' get y NB. avoid NiPSysData bogosity
   write_bool 'HasVertices' get y
