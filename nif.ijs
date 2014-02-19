@@ -7,7 +7,6 @@ NB. nif.ijs - relatively abstract class
 NB.   see also: readnif.ijs, writenif.ijs, nifxml.ijs
 
 require '~user/nifxml.ijs'
-coinsert 'nifxml' NB. for cond expressions
 
 NB. extract crude definition from nif.xml 
 getdef=: extract_nifxml_

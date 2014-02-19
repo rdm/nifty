@@ -3,7 +3,7 @@ NB. you should not expect to read this any faster than you read the whole of PyF
 NB. and if you are new to J you should also expect to spend some time learning the language
 NB. recommendation: take breaks occasionally, play with this, try to make it fun
 
-require '~user/nif.ijs'
+require '~user/nifxml.ijs'
 
 cocurrent 'readnif'
 erase names''
@@ -76,7 +76,7 @@ build_compound=:1 :0
     end.
   end.
   def=. def,':',LF,'  r=. x read_',m,' Repeated ''''',LF
-  smoutput '''',m,''' defRD (3 :0)',LF,def,')',LF
+  debug '''',m,''' defRD (3 :0)',LF,def,')',LF
   m defRD (3 :def)
 )
 
@@ -97,7 +97,7 @@ build_enum=:1 :0
   values=. 0".>, (#~ e.&(<'value'))~/@|:"2 enum
   names=. , (#~ e.&(<'name'))~/@|:"2 enum
   data=. names values} a:#~1+>./values
-  smoutput '''',m,''' defRD ((<;._2]0 :0) {~ ',fetcher,')',LF,(;data,each LF),')',LF
+  debug '''',m,''' defRD ((<;._2]0 :0) {~ ',fetcher,')',LF,(;data,each LF),')',LF
   m defRD (data {~ fetcher~) 
 )
     

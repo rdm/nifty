@@ -1,7 +1,8 @@
-require '~user/nif.ijs'
+require '~user/nifxml.ijs'
 
 cocurrent 'writenif'
 erase names''
+coinsert 'nifexpr'
 
 get=: ({:@] i. ($~ $ -.1:)@;:@[) >@{ {.@]
 get=:4 :0
@@ -10,7 +11,7 @@ get=:4 :0
   Y_base_=: y
   nm=. ($~ $ -.1:)@;: x
   vals=. {. y
-  smoutput ndx=. ({: y) i. nm
+  ndx=. ({: y) i. nm
   assert. (#WRITENIF) -: ndx {:: 1 { y
   > ndx { vals
 )
@@ -52,7 +53,7 @@ build_writer=:1 :0
     case. 'compound' do. m build_compound
     case. 'enum'     do. m build_enum
     case. 'niobject' do. m build_compound
-    case.            do. assert. 0-:'fail' [smoutput m
+    case.            do. assert. 0-:'fail' [smoutput  m
   end.
 )
 
@@ -75,7 +76,7 @@ build_compound=:1 :0
     label=. ' '-.~;(#~ e.&(<'name'))~/recipe
     def=. def,'  write_',type,' ''',label,''' get y',LF
   end.
-  smoutput '''',m,''' defwr (3 :0)',LF,def,')',LF
+  debug  '''',m,''' defwr (3 :0)',LF,def,')',LF
   m defwr (3 :def) 
 )
 
@@ -86,7 +87,7 @@ build_enum=:1 :0
   values=. 0".>, (#~ e.&(<'value'))~/@|:"2 enum
   names=. , (#~ e.&(<'name'))~/@|:"2 enum
   data=. names values} a:#~1+>./values
-  smoutput '''',m,''' defwr ((<;._2]0 :0) ',writer,'@i. ])',LF,(;data,each LF),')',LF
+  debug  '''',m,''' defwr ((<;._2]0 :0) ',writer,'@i. ])',LF,(;data,each LF),')',LF
   m defwr (data writer~@i. ]) 
 )
 

@@ -10,6 +10,13 @@ Version=: vton '4.0.0.2' NB. Morrowind
 UserVersion=: 0
 UserVersion2=: 0
 
+NB. utility
+lr=: 3 : '5!:5 <''y'''
+
+NB. comment out second definition to see emitted definitions from readnif/writenif
+debug=: smoutput
+debug=: ] 
+
 NB. this will extract a small part of the xml from nif.xml
 NB. it's not particularly fast, but it's good enough for now
 NB. FIXME: parse the file "just once"
