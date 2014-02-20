@@ -15,7 +15,11 @@ readinherit=:''1 :(0 :0-.LF)
 
 NB. from nif file name get J array
 read_nif=:3 :0
-  READNIF=: fread y
+  parse_nif fread jpath y
+)
+
+parse_nif=:3 :0
+  READNIF=: y
   assert. _1 ~: READNIF [ 'does file exist?'
   POS=: 0
   headerstring=. 40 read_char ''
@@ -240,8 +244,3 @@ NB.    m21 m22
 NB. work around pythonesque warts
 HasUnknown2Texture=: 0
 BSNumUVSets=: 0
-
-NB. ------------------ test on load
-
-0 0 $ read_nif jpath '~user\furniture\unpack\Furn_OrcLC_Table01.nif'
-NB. needs file from http://www.nexusmods.com/morrowind/mods/42513/

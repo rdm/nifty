@@ -21,21 +21,26 @@ put=: 3 :0
 )
 
 write_nif=:4 :0
-  assert. ('Header';(<"0 i._2+{:$x),<'Footer') -: {: x
+  WRITENIF=: put_nif x
+  WRITENIF fwrite y
+  i.0 0
+)
+
+put_nif=:3 :0
+  assert. ('Header';(<"0 i._2+{:$y),<'Footer') -: {: y
   WRITENIF=: ''
-  Header=. 'Header' get x
+  Header=. 'Header' get y
   assert. (;:'headerstring version numblocks') -: {: Header
   write_char 'headerstring' get Header
   write_int 'version' get Header
   write_int 'numblocks' get Header
-  Data=. }.{.x
-  for_block. >}:}.{:x do.
+  Data=. }.{.y
+  for_block. >}:}.{:y do.
     write_block block{::Data
   end.
   'Footer' build_compound
-  _ write_Footer 'Footer' get x
-  WRITENIF fwrite y
-  i.0 0
+  _ write_Footer 'Footer' get y
+  WRITENIF
 )
 
 write_block=:3 :0
@@ -158,7 +163,3 @@ NB. special case code (needed to match special case read code) -----
 'Vector3' defwr write_float
 'Matrix33' defwr (write_float@|:^:(0<#))
 'Matrix22' defwr (write_float@|:^:(0<#))
-
-NB. test on load
-require '~user/readnif.ijs'
-DATANIF_readnif_ write_nif jpath '~user/testout.nif'
