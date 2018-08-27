@@ -3,7 +3,7 @@ NB. you should not expect to read this any faster than you read the whole of PyF
 NB. and if you are new to J you should also expect to spend some time learning the language
 NB. recommendation: take breaks occasionally, play with this, try to make it fun
 
-require '~user/nifxml.ijs'
+require jcwdpath 'nifxml.ijs'
 
 cocurrent 'readnif'
 erase names''

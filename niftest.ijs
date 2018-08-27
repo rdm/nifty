@@ -1,7 +1,9 @@
-require 'dir ~user/readnif.ijs ~user/writenif.ijs'
+require 'dir'
+require jcwdpath 'readnif.ijs'
+requie jcwdpath 'writenif.ijs'
 
 3 :0 ''
-  for_file. {."1 dirtree jpath '~user/furniture/unpack/*.nif' do.
+  for_file. {."1 dirtree jpath jcwdpath 'furniture/unpack/*.nif' do.
     orig=: fread file
     if. _1 -: orig do.
       smoutput file

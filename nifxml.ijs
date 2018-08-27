@@ -1,4 +1,5 @@
-require 'xml/sax/x2j ~user/nifexpr.ijs strings'
+require 'xml/sax/x2j strings'
+require jcwdpath 'nifexpr.ijs'
 
 NB. FIXME: to support multiple versions will need to
 NB.        use an object instance of nifexpr or continually update as a singleton
@@ -27,7 +28,7 @@ NIFNames=: ''
 NIFMembers=: ''
 
 extract=:3 :0
-  if. 0=#NIFNames do. process_nifxml_ fread jpath '~user/nif.xml' end.
+  if. 0=#NIFNames do. process_nifxml_ fread jcwdpath 'nif.xml' end.
   restrictVersion&> ($~ $-.1:)NIFMembers {~ NIFNames i.;: y
 :
   Version_nifexpr_=: vton ::] x

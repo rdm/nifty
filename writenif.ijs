@@ -1,4 +1,4 @@
-require '~user/nifxml.ijs'
+require jcwdpath 'nifxml.ijs'
 
 cocurrent 'writenif'
 erase names''

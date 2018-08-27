@@ -9,7 +9,7 @@ Currently early draft
 
 Version hardcoded to Morrowind
 
-Files should go in obvious locations in J user directory
+nif.xml and J *.ijs are expected to be in the current directory
 
 (Polish must wait until after functionality.)
 
