@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE niftoolsxml>
-<niftoolsxml version="0.7.0.0">
+<niftoolsxml version="0.7.1.0">
     <!--These are the version numbers marked as supported by NifSkope.
         The num argument is the numeric representation created by storing
         each part of the version in a byte.  For example, 4.0.0.2 is
@@ -42,7 +42,8 @@
     <version num="20.6.0.0">KrazyRain</version>
     <version num="20.6.5.0">Epic Mickey</version>
     <version num="30.0.0.2">Emerge</version>
-
+    <version num="30.1.0.3">Rocksmith, Rocksmith 2014</version>
+    
     <!--Basic Types-->
 
     <basic name="bool" count="1" niflibtype="bool" nifskopetype="bool">
@@ -185,8 +186,8 @@
         <option value="1" name="LIGHT_MODE_EMI_AMB_DIF">Emissive + Ambient + Diffuse. (Default)</option>
     </enum>
 
-    <enum name="HavokMaterial" storage="uint">
-        A material, used by havok shape objects.
+    <enum name="OblivionHavokMaterial" storage="uint">
+        A material, used by havok shape objects in Oblivion.
         <option value="0" name="HAV_MAT_STONE">Stone</option>
         <option value="1" name="HAV_MAT_CLOTH">Cloth</option>
         <option value="2" name="HAV_MAT_DIRT">Dirt</option>
@@ -221,123 +222,303 @@
         <option value="31" name="HAV_MAT_RUBBER">Rubber</option>
     </enum>
 
+    <enum name="Fallout3HavokMaterial" storage="uint">
+        A material, used by havok shape objects in Fallout 3.
+        Bit 5: flag for PLATFORM (for values 32-63 substract 32 to know material number)
+        Bit 6: flag for STAIRS  (for values 64-95 substract 64 to know material number)
+        Bit 5+6: flag for STAIRS+PLATFORM  (for values 96-127 substract 96 to know material number)
+        <option value="0" name="MAT_STONE">Stone</option>
+        <option value="1" name="MAT_CLOTH">Cloth</option>
+        <option value="2" name="MAT_DIRT">Dirt</option>
+        <option value="3" name="MAT_GLASS">Glass</option>
+        <option value="4" name="MAT_GRASS">Grass</option>
+        <option value="5" name="MAT_METAL">Metal</option>
+        <option value="6" name="MAT_ORGANIC">Organic</option>
+        <option value="7" name="MAT_SKIN">Skin</option>
+        <option value="8" name="MAT_WATER">Water</option>
+        <option value="9" name="MAT_WOOD">Wood</option>
+        <option value="10" name="MAT_HEAVY_STONE">Heavy Stone</option>
+        <option value="11" name="MAT_HEAVY_METAL">Heavy Metal</option>
+        <option value="12" name="MAT_HEAVY_WOOD">Heavy Wood</option>
+        <option value="13" name="MAT_CHAIN">Chain</option>
+        <option value="14" name="MAT_BOTTLECAP">Bottlecap</option>
+        <option value="15" name="MAT_ELEVATOR">Elevator</option>
+        <option value="16" name="MAT_HOLLOW_METAL">Hollow Metal</option>
+        <option value="17" name="MAT_SHEET_METAL">Sheet Metal</option>
+        <option value="18" name="MAT_SAND">Sand</option>
+        <option value="19" name="MAT_BROKEN_CONCRETE">Broken Concrete</option>
+        <option value="20" name="MAT_VEHICLE_BODY">Vehicle Body</option>
+        <option value="21" name="MAT_VEHICLE_PART_SOLID">Vehicle Part Solid</option>
+        <option value="22" name="MAT_VEHICLE_PART_HOLLOW">Vehicle Part Hollow</option>
+        <option value="23" name="MAT_BARREL">Barrel</option>
+        <option value="24" name="MAT_BOTTLE">Bottle</option>
+        <option value="25" name="MAT_SODA_CAN">Soda Can</option>
+        <option value="26" name="MAT_PISTOL">Pistol</option>
+        <option value="27" name="MAT_RIFLE">Rifle</option>
+        <option value="28" name="MAT_SHOPPING_CART">Shopping Cart</option>
+        <option value="29" name="MAT_LUNCHBOX">Lunchbox</option>
+        <option value="30" name="MAT_BABY_RATTLE">Baby Rattle</option>
+        <option value="31" name="MAT_RUBBER_BALL">Rubber Ball</option>
+    </enum>
+
     <enum name="SkyrimHavokMaterial" storage="uint">
-        <option value="365420259" name="SKY_HAV_MAT_LIGHT_WOOD">Light Wood</option>
-        <option value="131151687" name="SKY_HAV_MAT_BROKEN_STONE">Broken Stone</option>
-        <option value="398949039" name="SKY_HAV_MAT_SNOW">Snow</option>
-        <option value="428587608" name="SKY_HAV_MAT_GRAVEL">Gravel</option>
-        <option value="438912228" name="SKY_HAV_MAT_MATERIAL_CHAIN_METAL">Material Chain Metal</option>
-        <option value="500811281" name="SKY_HAV_MAT_WOOD">Wood</option>
-        <option value="591247106" name="SKY_HAV_MAT_SKIN">Skin</option>
-        <option value="732141076" name="SKY_HAV_MAT_BARREL">Barrel</option>
-        <option value="781661019" name="SKY_HAV_MAT_MATERIAL_CERAMIC_MEDIUM">Material Ceramic Medium</option>
-        <option value="790784366" name="SKY_HAV_MAT_MATERIAL_BASKET">Material Basket</option>
-        <option value="873356572" name="SKY_HAV_MAT_ICE">Ice</option>
-        <option value="899511101" name="SKY_HAV_MAT_STAIRS_STONE">Stairs Stone</option>
-        <option value="1060167844" name="SKY_HAV_MAT_MATERIAL_BLADE_1HAND">Material Blade 1 Hand</option>
-        <option value="1024582599" name="SKY_HAV_MAT_WATER">Water</option>
-        <option value="1028101969" name="SKY_HAV_MAT_UNKNOWN_1028101969">Unknown in Creation Kit v1.6.89.0. Found in actors\draugr\character assets\skeletons.nif.</option>
-        <option value="1264672850" name="SKY_HAV_MAT_MATERIAL_BOOK">Material Book</option>
-        <option value="1288358971" name="SKY_HAV_MAT_SOLID_METAL">Solid Metal</option>
-        <option value="1305674443" name="SKY_HAV_MAT_MATERIAL_AXE_1HAND">Material Axe 1Hand</option>
-        <option value="1440721808" name="SKY_HAV_MAT_UNKNOWN_1440721808">Unknown in Creation Kit v1.6.89.0. Found in armor\draugr\draugrbootsfemale_go.nif or armor\amuletsandrings\amuletgnd.nif.</option>
-        <option value="1461712277" name="SKY_HAV_MAT_STAIRS_WOOD">Stairs Wood</option>
-        <option value="1486385281" name="SKY_HAV_MAT_MUD">Mud</option>
-        <option value="1560365355" name="SKY_HAV_MAT_STAIRS_SNOW">Stairs Snow</option>
-        <option value="1574477864" name="SKY_HAV_MAT_UNKNOWN_1574477864">Unknown in Creation Kit v1.6.89.0. Found in actors\dragon\character assets\skeleton.nif.</option>
-        <option value="1591009235" name="SKY_HAV_MAT_UNKNOWN_1591009235">Unknown in Creation Kit v1.6.89.0. Found in trap objects or clutter\displaycases\displaycaselgangled01.nif or actors\deer\character assets\skeleton.nif.</option>
-        <option value="1607128641" name="SKY_HAV_MAT_MATERIAL_BOWS_STAVES">Material Bows Staves</option>
-        <option value="1803571212" name="SKY_HAV_MAT_MATERIAL_WOOD_AS_STAIRS">Material Wood As Stairs</option>
-        <option value="1848600814" name="SKY_HAV_MAT_GRASS">Grass</option>
-        <option value="1885326971" name="SKY_HAV_MAT_MATERIAL_BOULDER_LARGE">Material Boulder Large</option>
-        <option value="1886078335" name="SKY_HAV_MAT_MATERIAL_STONE_AS_STAIRS">Material Stone As Stairs</option>
-        <option value="2022742644" name="SKY_HAV_MAT_MATERIAL_BLADE_2HAND">Material Blade 2Hand</option>
-        <option value="2025794648" name="SKY_HAV_MAT_MATERIAL_BOTTLE_SMALL">Material Bottle Small</option>
-        <option value="2168343821" name="SKY_HAV_MAT_SAND">Sand</option>
-        <option value="2229413539" name="SKY_HAV_MAT_HEAVY_METAL">Heavy Metal</option>
-        <option value="2518321175" name="SKY_HAV_MAT_DRAGON">Dragon</option>
-        <option value="2617944780" name="SKY_HAV_MAT_MATERIAL_BLADE_1HAND_SMALL">Material Blade 1Hand Small</option>
-        <option value="2632367422" name="SKY_HAV_MAT_MATERIAL_SKIN_SMALL">Material Skin Small</option>
-        <option value="2892392795" name="SKY_HAV_MAT_STAIRS_BROKEN_STONE">Stairs Broken Stone</option>
-        <option value="2965929619" name="SKY_HAV_MAT_MATERIAL_SKIN_LARGE">Material Skin Large</option>
-        <option value="2974920155" name="SKY_HAV_MAT_ORGANIC">Organic</option>
-        <option value="3049421844" name="SKY_HAV_MAT_MATERIAL_BONE">Material Bone</option>
-        <option value="3070783559" name="SKY_HAV_MAT_HEAVY_WOOD">Heavy Wood</option>
-        <option value="3074114406" name="SKY_HAV_MAT_MATERIAL_CHAIN">Material Chain</option>
-        <option value="3106094762" name="SKY_HAV_MAT_DIRT">Dirt</option>
-        <option value="3424720541" name="SKY_HAV_MAT_MATERIAL_ARMOR_LIGHT">Material Armor Light</option>
-        <option value="3448167928" name="SKY_HAV_MAT_MATERIAL_SHIELD_LIGHT">Material Shield Light</option>
-        <option value="3589100606" name="SKY_HAV_MAT_MATERIAL_COIN">Material Coin</option>
-        <option value="3702389584" name="SKY_HAV_MAT_MATERIAL_SHIELD_HEAVY">Material Shield Heavy</option>
-        <option value="3708432437" name="SKY_HAV_MAT_MATERIAL_ARMOR_HEAVY">Material Armor Heavy</option>
-        <option value="3725505938" name="SKY_HAV_MAT_MATERIAL_ARROW">Material Arrow</option>
-        <option value="3739830338" name="SKY_HAV_MAT_GLASS">Glass</option>
-        <option value="3741512247" name="SKY_HAV_MAT_STONE">Stone</option>
-        <option value="3839073443" name="SKY_HAV_MAT_CLOTH">Cloth</option>
-        <option value="3969592277" name="SKY_HAV_MAT_MATERIAL_BLUNT_2HAND">Material Blunt 2Hand</option>
-        <option value="4283869410" name="SKY_HAV_MAT_MATERIAL_BOULDER_MEDIUM">Material Boulder Medium</option>
+        A material, used by havok shape objects in Skyrim.
+        <option value="131151687" name="MAT_BROKEN_STONE">Broken Stone</option>
+        <option value="365420259" name="MAT_LIGHT_WOOD">Light Wood</option>
+        <option value="398949039" name="MAT_SNOW">Snow</option>
+        <option value="428587608" name="MAT_GRAVEL">Gravel</option>
+        <option value="438912228" name="MAT_MATERIAL_CHAIN_METAL">Material Chain Metal</option>
+        <option value="493553910" name="MAT_BOTTLE">Bottle</option>
+        <option value="500811281" name="MAT_WOOD">Wood</option>
+        <option value="591247106" name="MAT_SKIN">Skin</option>
+        <option value="732141076" name="MAT_BARREL">Barrel</option>
+        <option value="781661019" name="MAT_MATERIAL_CERAMIC_MEDIUM">Material Ceramic Medium</option>
+        <option value="790784366" name="MAT_MATERIAL_BASKET">Material Basket</option>
+        <option value="873356572" name="MAT_ICE">Ice</option>
+        <option value="899511101" name="MAT_STAIRS_STONE">Stairs Stone</option>
+        <option value="1024582599" name="MAT_WATER">Water</option>
+        <option value="1028101969" name="MAT_UNKNOWN_1028101969">Unknown in Creation Kit v1.6.89.0. Found in actors\draugr\character assets\skeletons.nif.</option>
+        <option value="1060167844" name="MAT_MATERIAL_BLADE_1HAND">Material Blade 1 Hand</option>
+        <option value="1264672850" name="MAT_MATERIAL_BOOK">Material Book</option>
+        <option value="1286705471" name="MAT_MATERIAL_CARPET">Material Carpet</option>
+        <option value="1288358971" name="MAT_SOLID_METAL">Solid Metal</option>
+        <option value="1305674443" name="MAT_MATERIAL_AXE_1HAND">Material Axe 1Hand</option>
+        <option value="1440721808" name="MAT_UNKNOWN_1440721808">Unknown in Creation Kit v1.6.89.0. Found in armor\draugr\draugrbootsfemale_go.nif or armor\amuletsandrings\amuletgnd.nif.</option>
+        <option value="1461712277" name="MAT_STAIRS_WOOD">Stairs Wood</option>
+        <option value="1486385281" name="MAT_MUD">Mud</option>
+        <option value="1550912982" name="MAT_MATERIAL_BOULDER_SMALL">Material Boulder Small</option>
+        <option value="1560365355" name="MAT_STAIRS_SNOW">Stairs Snow</option>
+        <option value="1570821952" name="MAT_HEAVY_STONE">Heavy Stone</option>
+        <option value="1574477864" name="MAT_UNKNOWN_1574477864">Unknown in Creation Kit v1.6.89.0. Found in actors\dragon\character assets\skeleton.nif.</option>
+        <option value="1591009235" name="MAT_UNKNOWN_1591009235">Unknown in Creation Kit v1.6.89.0. Found in trap objects or clutter\displaycases\displaycaselgangled01.nif or actors\deer\character assets\skeleton.nif.</option>
+        <option value="1607128641" name="MAT_MATERIAL_BOWS_STAVES">Material Bows Staves</option>
+        <option value="1803571212" name="MAT_MATERIAL_WOOD_AS_STAIRS">Material Wood As Stairs</option>
+        <option value="1848600814" name="MAT_GRASS">Grass</option>
+        <option value="1885326971" name="MAT_MATERIAL_BOULDER_LARGE">Material Boulder Large</option>
+        <option value="1886078335" name="MAT_MATERIAL_STONE_AS_STAIRS">Material Stone As Stairs</option>
+        <option value="2022742644" name="MAT_MATERIAL_BLADE_2HAND">Material Blade 2Hand</option>
+        <option value="2025794648" name="MAT_MATERIAL_BOTTLE_SMALL">Material Bottle Small</option>
+        <option value="2168343821" name="MAT_SAND">Sand</option>
+        <option value="2229413539" name="MAT_HEAVY_METAL">Heavy Metal</option>
+        <option value="2518321175" name="MAT_DRAGON">Dragon</option>
+        <option value="2617944780" name="MAT_MATERIAL_BLADE_1HAND_SMALL">Material Blade 1Hand Small</option>
+        <option value="2632367422" name="MAT_MATERIAL_SKIN_SMALL">Material Skin Small</option>
+        <option value="2892392795" name="MAT_STAIRS_BROKEN_STONE">Stairs Broken Stone</option>
+        <option value="2965929619" name="MAT_MATERIAL_SKIN_LARGE">Material Skin Large</option>
+        <option value="2974920155" name="MAT_ORGANIC">Organic</option>
+        <option value="3049421844" name="MAT_MATERIAL_BONE">Material Bone</option>
+        <option value="3070783559" name="MAT_HEAVY_WOOD">Heavy Wood</option>
+        <option value="3074114406" name="MAT_MATERIAL_CHAIN">Material Chain</option>
+        <option value="3106094762" name="MAT_DIRT">Dirt</option>
+        <option value="3424720541" name="MAT_MATERIAL_ARMOR_LIGHT">Material Armor Light</option>
+        <option value="3448167928" name="MAT_MATERIAL_SHIELD_LIGHT">Material Shield Light</option>
+        <option value="3589100606" name="MAT_MATERIAL_COIN">Material Coin</option>
+        <option value="3702389584" name="MAT_MATERIAL_SHIELD_HEAVY">Material Shield Heavy</option>
+        <option value="3708432437" name="MAT_MATERIAL_ARMOR_HEAVY">Material Armor Heavy</option>
+        <option value="3725505938" name="MAT_MATERIAL_ARROW">Material Arrow</option>
+        <option value="3739830338" name="MAT_GLASS">Glass</option>
+        <option value="3741512247" name="MAT_STONE">Stone</option>
+        <option value="3839073443" name="MAT_CLOTH">Cloth</option>
+        <option value="3969592277" name="MAT_MATERIAL_BLUNT_2HAND">Material Blunt 2Hand</option>
+        <option value="4283869410" name="MAT_MATERIAL_BOULDER_MEDIUM">Material Boulder Medium</option>
     </enum>
 
     <enum name="OblivionLayer" storage="byte">
         Sets mesh color in Oblivion Construction Set.  Anything higher than 57 is also null.
-        <option value="0" name="OL_UNIDENTIFIED">Unidentified (white)</option>
-        <option value="1" name="OL_STATIC">Static (red)</option>
-        <option value="2" name="OL_ANIM_STATIC">AnimStatic (magenta)</option>
-        <option value="3" name="OL_TRANSPARENT">Transparent (light pink)</option>
-        <option value="4" name="OL_CLUTTER">Clutter (light blue)</option>
-        <option value="5" name="OL_WEAPON">Weapon (orange)</option>
-        <option value="6" name="OL_PROJECTILE">Projectile (light orange)</option>
-        <option value="7" name="OL_SPELL">Spell (cyan)</option>
-        <option value="8" name="OL_BIPED">Biped (green) Seems to apply to all creatures/NPCs</option>
-        <option value="9" name="OL_TREES">Trees (light brown)</option>
-        <option value="10" name="OL_PROPS">Props (magenta)</option>
-        <option value="11" name="OL_WATER">Water (cyan)</option>
-        <option value="12" name="OL_TRIGGER">Trigger (light grey)</option>
-        <option value="13" name="OL_TERRAIN">Terrain (light yellow)</option>
-        <option value="14" name="OL_TRAP">Trap (light grey)</option>
-        <option value="15" name="OL_NONCOLLIDABLE">NonCollidable (white)</option>
-        <option value="16" name="OL_CLOUD_TRAP">CloudTrap (greenish grey)</option>
-        <option value="17" name="OL_GROUND">Ground (none)</option>
-        <option value="18" name="OL_PORTAL">Portal (green)</option>
-        <option value="19" name="OL_STAIRS">Stairs (white)</option>
-        <option value="20" name="OL_CHAR_CONTROLLER">CharController (yellow)</option>
-        <option value="21" name="OL_AVOID_BOX">AvoidBox (dark yellow)</option>
-        <option value="22" name="OL_UNKNOWN1">? (white)</option>
-        <option value="23" name="OL_UNKNOWN2">? (white)</option>
-        <option value="24" name="OL_CAMERA_PICK">CameraPick (white)</option>
-        <option value="25" name="OL_ITEM_PICK">ItemPick (white)</option>
-        <option value="26" name="OL_LINE_OF_SIGHT">LineOfSight (white)</option>
-        <option value="27" name="OL_PATH_PICK">PathPick (white)</option>
-        <option value="28" name="OL_CUSTOM_PICK_1">CustomPick1 (white)</option>
-        <option value="29" name="OL_CUSTOM_PICK_2">CustomPick2 (white)</option>
-        <option value="30" name="OL_SPELL_EXPLOSION">SpellExplosion (white)</option>
-        <option value="31" name="OL_DROPPING_PICK">DroppingPick (white)</option>
-        <option value="32" name="OL_OTHER">Other (white)</option>
-        <option value="33" name="OL_HEAD">Head</option>
-        <option value="34" name="OL_BODY">Body</option>
-        <option value="35" name="OL_SPINE1">Spine1</option>
-        <option value="36" name="OL_SPINE2">Spine2</option>
-        <option value="37" name="OL_L_UPPER_ARM">LUpperArm</option>
-        <option value="38" name="OL_L_FOREARM">LForeArm</option>
-        <option value="39" name="OL_L_HAND">LHand</option>
-        <option value="40" name="OL_L_THIGH">LThigh</option>
-        <option value="41" name="OL_L_CALF">LCalf</option>
-        <option value="42" name="OL_L_FOOT">LFoot</option>
-        <option value="43" name="OL_R_UPPER_ARM">RUpperArm</option>
-        <option value="44" name="OL_R_FOREARM">RForeArm</option>
-        <option value="45" name="OL_R_HAND">RHand</option>
-        <option value="46" name="OL_R_THIGH">RThigh</option>
-        <option value="47" name="OL_R_CALF">RCalf</option>
-        <option value="48" name="OL_R_FOOT">RFoot</option>
-        <option value="49" name="OL_TAIL">Tail</option>
-        <option value="50" name="OL_SIDE_WEAPON">SideWeapon</option>
-        <option value="51" name="OL_SHIELD">Shield</option>
-        <option value="52" name="OL_QUIVER">Quiver</option>
-        <option value="53" name="OL_BACK_WEAPON">BackWeapon</option>
-        <option value="54" name="OL_BACK_WEAPON2">BackWeapon (?)</option>
-        <option value="55" name="OL_PONYTAIL">PonyTail</option>
-        <option value="56" name="OL_WING">Wing</option>
-        <option value="57" name="OL_NULL">Null</option>
+        <option value="0" name="UNIDENTIFIED">Unidentified (white)</option>
+        <option value="1" name="STATIC">Static (red)</option>
+        <option value="2" name="ANIM_STATIC">AnimStatic (magenta)</option>
+        <option value="3" name="TRANSPARENT">Transparent (light pink)</option>
+        <option value="4" name="CLUTTER">Clutter (light blue)</option>
+        <option value="5" name="WEAPON">Weapon (orange)</option>
+        <option value="6" name="PROJECTILE">Projectile (light orange)</option>
+        <option value="7" name="SPELL">Spell (cyan)</option>
+        <option value="8" name="BIPED">Biped (green) Seems to apply to all creatures/NPCs</option>
+        <option value="9" name="TREES">Trees (light brown)</option>
+        <option value="10" name="PROPS">Props (magenta)</option>
+        <option value="11" name="WATER">Water (cyan)</option>
+        <option value="12" name="TRIGGER">Trigger (light grey)</option>
+        <option value="13" name="TERRAIN">Terrain (light yellow)</option>
+        <option value="14" name="TRAP">Trap (light grey)</option>
+        <option value="15" name="NONCOLLIDABLE">NonCollidable (white)</option>
+        <option value="16" name="CLOUD_TRAP">CloudTrap (greenish grey)</option>
+        <option value="17" name="GROUND">Ground (none)</option>
+        <option value="18" name="PORTAL">Portal (green)</option>
+        <option value="19" name="STAIRS">Stairs (white)</option>
+        <option value="20" name="CHAR_CONTROLLER">CharController (yellow)</option>
+        <option value="21" name="AVOID_BOX">AvoidBox (dark yellow)</option>
+        <option value="22" name="UNKNOWN1">? (white)</option>
+        <option value="23" name="UNKNOWN2">? (white)</option>
+        <option value="24" name="CAMERA_PICK">CameraPick (white)</option>
+        <option value="25" name="ITEM_PICK">ItemPick (white)</option>
+        <option value="26" name="LINE_OF_SIGHT">LineOfSight (white)</option>
+        <option value="27" name="PATH_PICK">PathPick (white)</option>
+        <option value="28" name="CUSTOM_PICK_1">CustomPick1 (white)</option>
+        <option value="29" name="CUSTOM_PICK_2">CustomPick2 (white)</option>
+        <option value="30" name="SPELL_EXPLOSION">SpellExplosion (white)</option>
+        <option value="31" name="DROPPING_PICK">DroppingPick (white)</option>
+        <option value="32" name="OTHER">Other (white)</option>
+        <option value="33" name="HEAD">Head</option>
+        <option value="34" name="BODY">Body</option>
+        <option value="35" name="SPINE1">Spine1</option>
+        <option value="36" name="SPINE2">Spine2</option>
+        <option value="37" name="L_UPPER_ARM">LUpperArm</option>
+        <option value="38" name="L_FOREARM">LForeArm</option>
+        <option value="39" name="L_HAND">LHand</option>
+        <option value="40" name="L_THIGH">LThigh</option>
+        <option value="41" name="L_CALF">LCalf</option>
+        <option value="42" name="L_FOOT">LFoot</option>
+        <option value="43" name="R_UPPER_ARM">RUpperArm</option>
+        <option value="44" name="R_FOREARM">RForeArm</option>
+        <option value="45" name="R_HAND">RHand</option>
+        <option value="46" name="R_THIGH">RThigh</option>
+        <option value="47" name="R_CALF">RCalf</option>
+        <option value="48" name="R_FOOT">RFoot</option>
+        <option value="49" name="TAIL">Tail</option>
+        <option value="50" name="SIDE_WEAPON">SideWeapon</option>
+        <option value="51" name="SHIELD">Shield</option>
+        <option value="52" name="QUIVER">Quiver</option>
+        <option value="53" name="BACK_WEAPON">BackWeapon</option>
+        <option value="54" name="BACK_WEAPON2">BackWeapon (?)</option>
+        <option value="55" name="PONYTAIL">PonyTail</option>
+        <option value="56" name="WING">Wing</option>
+        <option value="57" name="NULL">Null</option>
+    </enum>
+
+    <enum name="Fallout3Layer" storage="byte">
+        Sets mesh color in Fallout 3 GECK. Anything higher than 72 is also null.
+        <option value="0" name="UNIDENTIFIED">Unidentified (white)</option>
+        <option value="1" name="STATIC">Static (red)</option>
+        <option value="2" name="ANIM_STATIC">AnimStatic (magenta)</option>
+        <option value="3" name="TRANSPARENT">Transparent (light pink)</option>
+        <option value="4" name="CLUTTER">Clutter (light blue)</option>
+        <option value="5" name="WEAPON">Weapon (orange)</option>
+        <option value="6" name="PROJECTILE">Projectile (light orange)</option>
+        <option value="7" name="SPELL">Spell (cyan)</option>
+        <option value="8" name="BIPED">Biped (green) Seems to apply to all creatures/NPCs</option>
+        <option value="9" name="TREES">Trees (light brown)</option>
+        <option value="10" name="PROPS">Props (magenta)</option>
+        <option value="11" name="WATER">Water (cyan)</option>
+        <option value="12" name="TRIGGER">Trigger (light grey)</option>
+        <option value="13" name="TERRAIN">Terrain (light yellow)</option>
+        <option value="14" name="TRAP">Trap (light grey)</option>
+        <option value="15" name="NONCOLLIDABLE">NonCollidable (white)</option>
+        <option value="16" name="CLOUD_TRAP">CloudTrap (greenish grey)</option>
+        <option value="17" name="GROUND">Ground (none)</option>
+        <option value="18" name="PORTAL">Portal (green)</option>
+        <option value="19" name="DEBRIS_SMALL">DebrisSmall (white)</option>
+        <option value="20" name="DEBRIS_LARGE">DebrisLarge (white)</option>
+        <option value="21" name="ACOUSTIC_SPACE">AcousticSpace (white)</option>
+        <option value="22" name="ACTORZONE">Actorzone (white)</option>
+        <option value="23" name="PROJECTILEZONE">Projectilezone (white)</option>
+        <option value="24" name="GASTRAP">GasTrap (yellowish green)</option>
+        <option value="25" name="SHELLCASING">ShellCasing (white)</option>
+        <option value="26" name="TRANSPARENT_SMALL">TransparentSmall (white)</option>
+        <option value="27" name="INVISIBLE_WALL">InvisibleWall (white)</option>
+        <option value="28" name="TRANSPARENT_SMALL_ANIM">TransparentSmallAnim (white)</option>
+        <option value="29" name="BIPED">Biped (green)</option>
+        <option value="30" name="CHARCONTROLLER">CharController (yellow)</option>
+        <option value="31" name="AVOIDBOX">Avoidbox (orange)</option>
+        <option value="32" name="COLLISIONBOX">Collisionbox (white)</option>
+        <option value="33" name="CAMERASPHERE">Camerasphere (white)</option>
+        <option value="34" name="DOORDETECTION">Doordetection (white)</option>
+        <option value="35" name="CAMERAPICK">Camerapick (white)</option>
+        <option value="36" name="ITEMPICK">Itempick (white)</option>
+        <option value="37" name="LINEOFSIGHT">LineOfSight (white)</option>
+        <option value="38" name="PATHPICK">Pathpick (white)</option>
+        <option value="39" name="CUSTOMPICK1">Custompick1 (white)</option>
+        <option value="40" name="CUSTOMPICK2">Custompick2 (white)</option>
+        <option value="41" name="SPELLEXPLOSION">SpellExplosion (white)</option>
+        <option value="42" name="DROPPINGPICK">Droppingpick (white)</option>
+        <option value="43" name="NULL">Null (white)</option>
+        <option value="44" name="OTHER">Other (white)</option>
+        <option value="45" name="HEAD">Head</option>
+        <option value="46" name="BODY">Body</option>
+        <option value="47" name="SPINE1">Spine1</option>
+        <option value="48" name="SPINE2">Spine2</option>
+        <option value="49" name="L_UPPER_ARM">LUpperArm</option>
+        <option value="50" name="L_FORE_ARM">LForeArm</option>
+        <option value="51" name="L_HAND">LHand</option>
+        <option value="52" name="L_THIGH">LThigh</option>
+        <option value="53" name="L_CALF">LCalf</option>
+        <option value="54" name="L_FOOT">LFoot</option>
+        <option value="55" name="R_UPPER_ARM">RUpperArm</option>
+        <option value="56" name="R_FORE_ARM">RForeArm</option>
+        <option value="57" name="R_HAND">RHand</option>
+        <option value="58" name="R_THIGH">RThigh</option>
+        <option value="59" name="R_CALF">RCalf</option>
+        <option value="60" name="R_FOOT">RFoot</option>
+        <option value="61" name="TAIL">Tail</option>
+        <option value="62" name="SHIELD">Shield</option>
+        <option value="63" name="QUIVER">Quiver</option>
+        <option value="64" name="WEAPON">Weapon (?)</option>
+        <option value="65" name="PONYTAIL">Ponytail</option>
+        <option value="66" name="WING">Wing</option>
+        <option value="67" name="PACK">Pack</option>
+        <option value="68" name="CHAIN">Chain</option>
+        <option value="69" name="ADDONHEAD">AddOnHead</option>
+        <option value="70" name="ADDONCHEST">AddOnChest</option>
+        <option value="71" name="ADDONARM">AddOnArm</option>
+        <option value="72" name="ADDONLEG">AddOnLeg</option>
+    </enum>
+
+    <enum name="SkyrimLayer" storage="byte">
+        Physical purpose of collision object? The setting affects object's havok behavior in game. Anything higher than 47 is also null.
+        <option value="0" name="UNIDENTIFIED">Unidentified</option>
+        <option value="1" name="STATIC">Static</option>
+        <option value="2" name="ANIMSTATIC">Anim Static</option>
+        <option value="3" name="TRANSPARENT">Transparent</option>
+        <option value="4" name="CLUTTER">Clutter. Object with this layer will float on water surface.</option>
+        <option value="5" name="WEAPON">Weapon</option>
+        <option value="6" name="PROJECTILE">Projectile</option>
+        <option value="7" name="SPELL">Spell</option>
+        <option value="8" name="BIPED">Biped. Seems to apply to all creatures/NPCs</option>
+        <option value="9" name="TREES">Trees</option>
+        <option value="10" name="PROPS">Props</option>
+        <option value="11" name="WATER">Water</option>
+        <option value="12" name="TRIGGER">Trigger</option>
+        <option value="13" name="TERRAIN">Terrain</option>
+        <option value="14" name="TRAP">Trap</option>
+        <option value="15" name="NONCOLLIDABLE">NonCollidable</option>
+        <option value="16" name="CLOUD_TRAP">CloudTrap</option>
+        <option value="17" name="GROUND">Ground. It seems that produces no sound when collide.</option>
+        <option value="18" name="PORTAL">Portal</option>
+        <option value="19" name="DEBRIS_SMALL">Debris Small</option>
+        <option value="20" name="DEBRIS_LARGE">Debris Large</option>
+        <option value="21" name="ACOUSTIC_SPACE">Acoustic Space</option>
+        <option value="22" name="ACTORZONE">Actor Zone</option>
+        <option value="23" name="PROJECTILEZONE">Projectile Zone</option>
+        <option value="24" name="GASTRAP">Gas Trap</option>
+        <option value="25" name="SHELLCASING">Shell Casing</option>
+        <option value="26" name="TRANSPARENT_SMALL">Transparent Small</option>
+        <option value="27" name="INVISIBLE_WALL">Invisible Wall</option>
+        <option value="28" name="TRANSPARENT_SMALL_ANIM">Transparent Small Anim</option>
+        <option value="29" name="WARD">Ward</option>
+        <option value="30" name="CHARCONTROLLER">Char Controller</option>
+        <option value="31" name="STAIRHELPER">Stair Helper</option>
+        <option value="32" name="DEADBIP">Dead Bip</option>
+        <option value="33" name="BIPED_NO_CC">Biped No CC</option>
+        <option value="34" name="AVOIDBOX">Avoid Box</option>
+        <option value="35" name="COLLISIONBOX">Collision Box</option>
+        <option value="36" name="CAMERASHPERE">Camera Sphere</option>
+        <option value="37" name="DOORDETECTION">Door Detection</option>
+        <option value="38" name="CONEPROJECTILE">Cone Projectile</option>
+        <option value="39" name="CAMERAPICK">Camera Pick</option>
+        <option value="40" name="ITEMPICK">Item Pick</option>
+        <option value="41" name="LINEOFSIGHT">Line of Sight</option>
+        <option value="42" name="PATHPICK">Path Pick</option>
+        <option value="43" name="CUSTOMPICK1">Custom Pick 1</option>
+        <option value="44" name="CUSTOMPICK2">Custom Pick 2</option>
+        <option value="45" name="SPELLEXPLOSION">Spell Explosion</option>
+        <option value="46" name="DROPPINGPICK">Dropping Pick</option>
+        <option value="47" name="NULL">Null</option>
+    </enum>
+
+    <enum name="MoppDataBuildType" storage="byte">
+        A byte describing if MOPP Data is organized into chunks (PS3) or not (PC)
+        <option value="0" name="BUILT_WITH_CHUNK_SUBDIVISION">Organized in chunks for PS3.</option>
+        <option value="1" name="BUILT_WITHOUT_CHUNK_SUBDIVISION">Not organized in chunks for PC. (Default)</option>
+        <option value="2" name="BUILD_NOT_SET">Build type not set yet.</option>
     </enum>
 
     <enum name="MipMapFormat" storage="uint">
@@ -408,11 +589,13 @@
 
     <enum name="BillboardMode" storage="ushort">
         Determines the way the billboard will react to the camera.
+        Billboard mode is stored in lowest 3 bits although Oblivion vanilla nifs uses values higher than 7.
         <option value="0" name="ALWAYS_FACE_CAMERA">The billboard will always face the camera.</option>
         <option value="1" name="ROTATE_ABOUT_UP">The billboard will only rotate around the up axis.</option>
         <option value="2" name="RIGID_FACE_CAMERA">Rigid Face Camera.</option>
         <option value="3" name="ALWAYS_FACE_CENTER">Always Face Center.</option>
         <option value="4" name="RIGID_FACE_CENTER">Rigid Face Center.</option>
+        <option value="5" name="BSROTATE_ABOUT_UP">The billboard will only rotate around its local Z axis (it always stays in its local X-Y plane).</option>
         <option value="9" name="ROTATE_ABOUT_UP2">The billboard will only rotate around the up axis (same as ROTATE_ABOUT_UP?).</option>
     </enum>
 
@@ -758,6 +941,60 @@
         <option value="17" name="Unknown 17"></option>
         <option value="18" name="WorldMap4"></option>
         <option value="19" name="World LOD Multitexture"></option>
+    </enum>
+
+    <enum name="EffectShaderControlledVariable" storage="uint">
+        An unsigned 32-bit integer, describing which float variable in BSEffectShaderProperty to animate.
+        <option value="0" name="EmissiveMultiple">EmissiveMultiple.</option>
+        <option value="1" name="Falloff Start Angle (degrees)">Falloff Start Angle (degrees).</option>
+        <option value="2" name="Falloff Stop Angle (degrees)">Falloff Stop Angle (degrees).</option>
+        <option value="3" name="Falloff Start Opacity">Falloff Start Opacity.</option>
+        <option value="4" name="Falloff Stop Opacity">Falloff Stop Opacity.</option>
+        <option value="5" name="Alpha Transparency (Emissive alpha?)">Alpha Transparency (Emissive alpha?).</option>
+        <option value="6" name="U Offset">U Offset.</option>
+        <option value="7" name="U Scale">U Scale.</option>
+        <option value="8" name="V Offset">V Offset.</option>
+        <option value="9" name="V Scale">V Scale.</option>
+    </enum>
+
+    <enum name="EffectShaderControlledColor" storage="uint">
+        An unsigned 32-bit integer, describing which color in BSEffectShaderProperty to animate.
+        <option value="0" name="Emissive Color">Emissive Color.</option>
+    </enum>
+
+    <enum name="LightingShaderControlledVariable" storage="uint">
+        An unsigned 32-bit integer, describing which float variable in BSLightingShaderProperty to animate.
+        <option value="0" name="Refraction Strength">The amount of distortion.</option>
+        <option value="8" name="Environment Map Scale">Environment Map Scale.</option>
+        <option value="9" name="Glossiness">Glossiness.</option>
+        <option value="10" name="Specular Strength">Specular Strength.</option>
+        <option value="11" name="Emissive Multiple">Emissive Multiple.</option>
+        <option value="12" name="Alpha">Alpha.</option>
+        <option value="20" name="U Offset">U Offset.</option>
+        <option value="21" name="U Scale">U Scale.</option>
+        <option value="22" name="V Offset">V Offset.</option>
+        <option value="23" name="V Scale">V Scale.</option>
+    </enum>
+
+    <enum name="LightingShaderControlledColor" storage="uint">
+        An unsigned 32-bit integer, describing which color in BSLightingShaderProperty to animate.
+        <option value="0" name="Specular Color">Specular Color.</option>
+        <option value="1" name="Emissive Color">Emissive Color.</option>
+    </enum>
+
+    <enum name="ExtraVectorsFlags" storage="byte">
+        <option value="16" name="Tangents_Bitangents">Has Tangents and Bitangents Vectors.</option>
+    </enum>
+
+    <enum name="hkConstraintType" storage="uint">
+        The type of constraint.
+        <option value="0" name="BallAndSocket">A ball and socket constraint.</option>
+        <option value="1" name="Hinge">A hinge constraint.</option>
+        <option value="2" name="Limited Hinge">A limited hinge constraint.</option>
+        <option value="6" name="Prismatic">A prismatic constraint.</option>
+        <option value="7" name="Ragdoll">A ragdoll constraint.</option>
+        <option value="8" name="StiffSpring">A stiff spring constraint.</option>
+<!--        <option value="10" name="Generic">A generic constraint.</option>-->
     </enum>
 
     <!--Compounds
@@ -1207,25 +1444,25 @@
 
         <!-- related to the file posted in tracker item #3117836:
             http://sourceforge.net/tracker/?func=detail&aid=3117836&group_id=149157&atid=776343 -->
-        <add name="Unknown 83 C3" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1" ></add>
+<!--        <add name="Unknown 83 C3" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1" ></add>
         <add name="Unknown 00 00 1" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>
         <add name="Num Vertices 2" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>
         <add name="Unknown 00 00 2" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>
         <add name="Unknown 00 00 3" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>
         <add name="Unknown 00 00 4" type="ushort" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>
-        <add name="Unknown Arr 1" type="SkinPartitionUnknownItem1" arr1="Num Vertices 2" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>
+        <add name="Unknown Arr 1" type="SkinPartitionUnknownItem1" arr1="Num Vertices 2" ver1="10.2.0.0" ver2="10.2.0.0" vercond="User Version == 1"></add>-->
     </compound>
 
     <!-- related to the file posted in tracker item #3117836:
         http://sourceforge.net/tracker/?func=detail&aid=3117836&group_id=149157&atid=776343 -->
-    <compound name="SkinPartitionUnknownItem1">
+<!--    <compound name="SkinPartitionUnknownItem1">
         <add name="Unknown Flags" type="uint"></add>
         <add name="f1" type="float"></add>
         <add name="f2" type="float"></add>
         <add name="f3" type="float"></add>
         <add name="f4" type="float"></add>
         <add name="f5" type="float"></add>
-    </compound>
+    </compound>-->
 
     <compound name="QTransform">
         <add name="Translation" type="Vector3">Translation.</add>
@@ -1328,18 +1565,63 @@
         <add name="Radius" type="float">The sphere's radius.</add>
     </compound>
 
-    <compound name="OblivionColFilter">
-        Oblivion's ColFilter property for Havok.
-        <add name="Layer" type="OblivionLayer">Sets mesh color in Oblivion Construction Set.</add>
-        <add name="Col Filter" type="byte">The first bit sets the LINK property and controls whether this body is physically linked to others. The next bit turns collision off. Then, the next bit sets the SCALED property in Oblivion. The next five bits make up the number of this part in a linked body list.</add>
+    <compound name="HavokColFilter">
+        ColFilter property for Havok. It contains Layer, Flags and Part Number
+        <add name="Layer" type="OblivionLayer" default="STATIC" vercond="(Version != 20.2.0.7) || ((Version == 20.2.0.7) &amp;&amp; (User Version != 11) &amp;&amp; (User Version != 12) &amp;&amp; (User Version 2 != 34) &amp;&amp; (User Version 2 != 83))">Sets mesh color in Oblivion Construction Set.</add><!--condition: all except Fallout 3 and Skyrim -->
+        <add name="Layer" type="Fallout3Layer" default="STATIC" vercond="(Version == 20.2.0.7) &amp;&amp; (User Version == 11) &amp;&amp; (User Version 2 == 34)">Sets mesh color in Fallout 3 GECK.</add>
+        <add name="Layer" type="SkyrimLayer" default="STATIC" vercond="(Version == 20.2.0.7) &amp;&amp; (User Version == 12) &amp;&amp; (User Version 2 == 83)">Physical purpose of collision object? The setting affects object's havok behavior in game.</add>
+
+        <add name="Flags and Part Number" type="byte" default="0">FLAGS are stored in highest 3 bits:
+        	Bit 7: sets the LINK property and controls whether this body is physically linked to others.
+        	Bit 6: turns collision off (not used for Layer BIPED).
+        	Bit 5: sets the SCALED property.
+
+					PART NUMBER is stored in bits 0-4. Used only when Layer is set to BIPED.
+
+					Part Numbers for Oblivion, Fallout 3, Skyrim:
+        	0 - OTHER
+        	1 - HEAD
+        	2 - BODY
+        	3 - SPINE1
+        	4 - SPINE2
+        	5 - LUPPERARM
+        	6 - LFOREARM
+        	7 - LHAND
+        	8 - LTHIGH
+        	9 - LCALF
+        	10 - LFOOT
+        	11 - RUPPERARM
+        	12 - RFOREARM
+        	13 - RHAND
+        	14 - RTHIGH
+        	15 - RCALF
+        	16 - RFOOT
+        	17 - TAIL
+        	18 - SHIELD
+        	19 - QUIVER
+        	20 - WEAPON
+        	21 - PONYTAIL
+        	22 - WING
+        	23 - PACK
+        	24 - CHAIN
+        	25 - ADDONHEAD
+        	26 - ADDONCHEST
+        	27 - ADDONARM
+        	28 - ADDONLEG
+        	29-31 - NULL
+        </add>
         <add name="Unknown Short" type="ushort">Unknown.</add>
+    </compound>
+
+    <compound name="HavokMaterial">
+        <add name="Material" type="OblivionHavokMaterial" vercond="(Version != 20.2.0.7) || ((Version == 20.2.0.7) &amp;&amp; (User Version != 11) &amp;&amp; (User Version != 12) &amp;&amp; (User Version 2 != 34) &amp;&amp; (User Version 2 != 83))">The material of the shape.</add><!--condition: all except Fallout 3 and Skyrim -->
+        <add name="Material" type="Fallout3HavokMaterial" vercond="(Version == 20.2.0.7) &amp;&amp; (User Version == 11) &amp;&amp; (User Version 2 == 34)">The material of the shape.</add>
+        <add name="Material" type="SkyrimHavokMaterial" vercond="(Version == 20.2.0.7) &amp;&amp; (User Version == 12) &amp;&amp; (User Version 2 == 83)">The material of the shape.</add>
     </compound>
 
     <compound name="OblivionSubShape">
         Havok Information for packed TriStrip shapes.
-        <add name="Layer" type="OblivionLayer">Sets mesh color in Oblivion Construction Set.</add>
-        <add name="Col Filter" type="byte">The first bit sets the LINK property and controls whether this body is physically linked to others. The next bit turns collision off. Then, the next bit sets the SCALED property in Oblivion. The next five bits make up the number of this part in a linked body list.</add>
-        <add name="Unknown Short" type="ushort">Unknown. Perhaps the vertex wielding type?</add>
+        <add name="Havok Col Filter" type="HavokColFilter" />
         <add name="Num Vertices" type="uint">The number of vertices that form this sub shape.</add>
         <add name="Material" type="HavokMaterial">The material of the subshape.</add>
     </compound>
@@ -1365,24 +1647,32 @@
         <add name="Twist B" type="Vector4" ver2="20.0.0.5">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane B.</add>
 
         <!-- Fallout 3 -->
-        <add name="Twist A" type="Vector4" ver1="20.2.0.7">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane A.</add>
-        <add name="Plane A" type="Vector4" ver1="20.2.0.7">Defines the orthogonal plane in which the body can move, the orthogonal directions in which the shape can be controlled (the direction orthogonal on this one and Twist A).</add>
-        <add name="Motor A" type="Vector4" ver1="20.2.0.7">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
-        <add name="Pivot A" type="Vector4" ver1="20.2.0.7">Point around which the object will rotate. Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
-        <add name="Twist B" type="Vector4" ver1="20.2.0.7">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane B.</add>
-        <add name="Plane B" type="Vector4" ver1="20.2.0.7">Defines the orthogonal plane in which the body can move, the orthogonal directions in which the shape can be controlled (the direction orthogonal on this one and Twist A).</add>
-        <add name="Motor B" type="Vector4" ver1="20.2.0.7">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
-        <add name="Pivot B" type="Vector4" ver1="20.2.0.7">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
+        <add name="Twist A" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane A.</add>
+        <add name="Plane A" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Defines the orthogonal plane in which the body can move, the orthogonal directions in which the shape can be controlled (the direction orthogonal on this one and Twist A).</add>
+        <add name="Motor A" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
+        <add name="Pivot A" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Point around which the object will rotate. Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
+        <add name="Twist B" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane B.</add>
+        <add name="Plane B" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Defines the orthogonal plane in which the body can move, the orthogonal directions in which the shape can be controlled (the direction orthogonal on this one and Twist A).</add>
+        <add name="Motor B" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
+        <add name="Pivot B" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
 
-        <add name="Cone Max Angle" 	type="float">Maximum angle the object can rotate around the vector orthogonal on Plane A and Twist A relative to the Twist A vector. Note that Cone Min Angle is not stored, but is simply minus this angle.</add>
+        <!-- Fallout 3, file meshes\ragdollconstraint\stiff.rdt with User Version 2 = 16 -->
+        <add name="Pivot A?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Point around which the object will rotate. Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
+        <add name="Plane A?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Defines the orthogonal plane in which the body can move, the orthogonal directions in which the shape can be controlled (the direction orthogonal on this one and Twist A).</add>
+        <add name="Twist A?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane A.</add>
+        <add name="Pivot B?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Defines the orthogonal directions in which the shape can be controlled (namely in this direction, and in the direction orthogonal on this one and Twist A).</add>
+        <add name="Plane B?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Defines the orthogonal plane in which the body can move, the orthogonal directions in which the shape can be controlled (the direction orthogonal on this one and Twist A).</add>
+        <add name="Twist B?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Central directed axis of the cone in which the object can rotate. Orthogonal on Plane B.</add>
+
+        <add name="Cone Max Angle" type="float">Maximum angle the object can rotate around the vector orthogonal on Plane A and Twist A relative to the Twist A vector. Note that Cone Min Angle is not stored, but is simply minus this angle.</add>
         <add name="Plane Min Angle" type="float">Minimum angle the object can rotate around Plane A, relative to Twist A.</add>
         <add name="Plane Max Angle" type="float">Maximum angle the object can rotate around Plane A, relative to Twist A.</add>
         <add name="Twist Min Angle" type="float">Minimum angle the object can rotate around Twist A, relative to Plane A.</add>
         <add name="Twist Max Angle" type="float">Maximum angle the object can rotate around Twist A, relative to Plane A.</add>
-        <add name="Max Friction" 	type="float">Maximum friction, typically 0 or 10. In Fallout 3, typically 100.</add>
+        <add name="Max Friction" type="float">Maximum friction, typically 0 or 10. In Fallout 3, typically 100.</add>
 
-        <add name="Enable Motor" type="bool" ver1="20.2.0.7">Unknown</add>
-        <add name="Motor" type="MotorDescriptor" cond="Enable Motor" ver1="20.2.0.7" />
+        <add name="Enable Motor" type="bool" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Unknown</add>
+        <add name="Motor" type="MotorDescriptor" cond="Enable Motor" ver1="20.2.0.7" vercond="User Version 2 &gt; 16" />
     </compound>
 
     <compound name="LimitedHingeDescriptor">
@@ -1398,21 +1688,30 @@
         <add name="Perp2 Axle In B2" type="Vector4" ver2="20.0.0.5">Perp2 Axle In A2 in second entity coordinate system.</add>
 
         <!-- Fallout 3 -->
-        <add name="Axle A" type="Vector4" ver1="20.2.0.7">Axis of rotation.</add>
-        <add name="Perp2 Axle In A1" type="Vector4" ver1="20.2.0.7">Vector in the rotation plane which defines the zero angle.</add>
-        <add name="Perp2 Axle In A2" type="Vector4" ver1="20.2.0.7">Vector in the rotation plane, orthogonal on the previous one, which defines the positive direction of rotation. This is always the vector product of Axle A and Perp2 Axle In A1.</add>
-        <add name="Pivot A" type="Vector4" ver1="20.2.0.7">Pivot point around which the object will rotate.</add>
-        <add name="Axle B" type="Vector4" ver1="20.2.0.7">Axle A in second entity coordinate system.</add>
-        <add name="Perp2 Axle In B1" type="Vector4" ver1="20.2.0.7">Perp2 Axle In A1 in second entity coordinate system.</add>
-        <add name="Perp2 Axle In B2" type="Vector4" ver1="20.2.0.7">Perp2 Axle In A2 in second entity coordinate system.</add>
-        <add name="Pivot B" type="Vector4" ver1="20.2.0.7">Pivot A in second entity coordinate system.</add>
+        <add name="Axle A" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Axis of rotation.</add>
+        <add name="Perp2 Axle In A1" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Vector in the rotation plane which defines the zero angle.</add>
+        <add name="Perp2 Axle In A2" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Vector in the rotation plane, orthogonal on the previous one, which defines the positive direction of rotation. This is always the vector product of Axle A and Perp2 Axle In A1.</add>
+        <add name="Pivot A" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Pivot point around which the object will rotate.</add>
+        <add name="Axle B" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Axle A in second entity coordinate system.</add>
+        <add name="Perp2 Axle In B1" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Perp2 Axle In A1 in second entity coordinate system.</add>
+        <add name="Perp2 Axle In B2" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Perp2 Axle In A2 in second entity coordinate system.</add>
+        <add name="Pivot B" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Pivot A in second entity coordinate system.</add>
+
+        <!-- Fallout 3, file meshes\ragdollconstraint\stiff.rdt with User Version 2 = 16 -->
+        <add name="Pivot A?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Pivot point around which the object will rotate.</add>
+        <add name="Axle A?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Axis of rotation.</add>
+        <add name="Perp2 Axle In A2?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Vector in the rotation plane, orthogonal on the previous one, which defines the positive direction of rotation. This is always the vector product of Axle A and Perp2 Axle In A1.</add>
+        <add name="Perp2 Axle In A1?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Vector in the rotation plane which defines the zero angle.</add>
+        <add name="Pivot B?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Pivot A in second entity coordinate system.</add>
+        <add name="Axle B?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Axle A in second entity coordinate system.</add>
+        <add name="Perp2 Axle In B1?" type="Vector4" ver1="20.2.0.7" vercond="User Version 2 == 16">Perp2 Axle In A1 in second entity coordinate system.</add>
 
         <add name="Min Angle" type="float">Minimum rotation angle.</add>
         <add name="Max Angle" type="float">Maximum rotation angle.</add>
         <add name="Max Friction" type="float">Maximum friction, typically either 0 or 10. In Fallout 3, typically 100.</add>
 
-        <add name="Enable Motor" type="bool" ver1="20.2.0.7">Unknown</add>
-        <add name="Motor" type="MotorDescriptor" cond="Enable Motor" ver1="20.2.0.7" />
+        <add name="Enable Motor" type="bool" ver1="20.2.0.7" vercond="User Version 2 &gt; 16">Unknown</add>
+        <add name="Motor" type="MotorDescriptor" cond="Enable Motor" ver1="20.2.0.7" vercond="User Version 2 &gt; 16" />
     </compound>
 
     <compound name="HingeDescriptor">
@@ -1436,6 +1735,45 @@
         <add name="Pivot B" type="Vector4" ver1="20.2.0.7">Pivot A in second entity coordinate system.</add>
 
         <!-- no friction -->
+    </compound>
+
+    <compound name="BallAndSocketDescriptor">
+        <add name="Unknown 4 bytes" type="byte" arr1="4">Unknown</add>
+        <add name="Unknown Floats 1" type="Vector3">Unknown</add>
+        <add name="Unknown Floats 2" type="Vector3">Unknown</add>
+        <add name="Unknown Int 1" type="uint">Unknown</add>
+    </compound>
+
+    <compound name="PrismaticDescriptor">
+        <!-- Oblivion -->
+        <add name="Pivot A" type="Vector4" ver2="20.0.0.5">Pivot A.</add>
+        <add name="Rotation Matrix A" type="Vector4" arr1="4" ver2="20.0.0.5">4x4 rotation matrix, rotates the child entity.</add>
+        <add name="Pivot B" type="Vector4" ver2="20.0.0.5">Pivot B.</add>
+        <add name="Sliding B" type="Vector4" ver2="20.0.0.5">Describes the axis the object is able to travel along. Unit vector.</add>
+        <add name="Plane B" type="Vector4" ver2="20.0.0.5">Plane normal. Describes the plane the object is able to move on.</add>
+
+        <!-- Fallout 3 -->
+        <add name="Sliding A" type="Vector4" ver1="20.2.0.7">Describes the axis the object is able to travel along. Unit vector.</add>
+        <add name="Rotation A" type="Vector4" ver1="20.2.0.7">Rotation axis.</add>
+        <add name="Plane A" type="Vector4" ver1="20.2.0.7">Plane normal. Describes the plane the object is able to move on.</add>
+        <add name="Pivot A" type="Vector4" ver1="20.2.0.7">Pivot.</add>
+        <add name="Sliding B" type="Vector4" ver1="20.2.0.7">Describes the axis the object is able to travel along in B coordinates. Unit vector.</add>
+        <add name="Rotation B" type="Vector4" ver1="20.2.0.7">Rotation axis.</add>
+        <add name="Plane B" type="Vector4" ver1="20.2.0.7">Plane normal. Describes the plane the object is able to move on in B coordinates.</add>
+        <add name="Pivot B" type="Vector4" ver1="20.2.0.7">Pivot in B coordinates.</add>
+
+        <add name="Min Distance" type="float">Describe the min distance the object is able to travel.</add>
+
+        <add name="Max Distance" type="float">Describe the max distance the object is able to travel.</add>
+        <add name="Friction" type="float" >Friction.</add>
+
+        <add name="Unknown Byte 1" type="byte" ver1="20.2.0.7" default="0">Unknown. Do not set this to anything over 0 as it will crash the game.</add>
+    </compound>
+
+    <compound name="StiffSpringDescriptor">
+        <add name="Pivot A" type="Vector4">Pivot A.</add>
+        <add name="Pivot B" type="Vector4">Pivot B.</add>
+        <add name="Length" type="float">Length.</add>
     </compound>
 
     <compound name="OldSkinData">
@@ -1484,6 +1822,7 @@
     <compound name="HalfSpaceBV">
         <add name="Normal" type="Vector3">Normal</add>
         <add name="Center" type="Vector3">Center</add>
+        <add name="Unknown Float 1" type="float">Unknown.</add>
     </compound>
 
     <compound name="BoundingVolume">
@@ -1584,9 +1923,11 @@
     </compound>
 
 	<compound name="bhkCMSDMaterial">
-    per-chunk material, used in bhkCompressedMeshShapeData
-		<add name="Skyrim Material" type="SkyrimHavokMaterial">Material.</add>
-		<add name="Unknown Integer" type="uint">Always 1?</add>
+    Per-chunk material, used in bhkCompressedMeshShapeData
+		<add name="Material" type="SkyrimHavokMaterial">Material.</add>
+		<add name="Layer" type="SkyrimLayer">Copy of Layer from bhkRigidBody. The value is stored as 32-bit integer.</add>
+    <add name="Byte set to 0" type="byte" default="0">Always set to 0. It is only remainder of "Layer" 32-bit integer above.</add>
+    <add name="Short set to 0" type="ushort" default="0">Always set to 0. It is only remainder of "Layer" 32-bit integer above.</add>
 	</compound>
 
     <compound name="bhkCMSDBigTris">
@@ -1620,26 +1961,42 @@
         <add name="Indices 2" type="ushort" arr1="Num Indices 2">Compressed </add>
     </compound>
 
-<!-- nowhere used currently
-	<compound name="RagdollTemplateSubData1">
-		Todo: Add route for secondary Ref set?
-		<add name="Unknown Flag 3" type="uint">Unknown</add>
-		<add name="Unknown 2" type="uint">Unknown</add>
-		<add name="Unknown Ref 1" type="Ref" template="NiObject">Unknown</add>
-		<add name="Unknown Ref 2" type="Ref" template="NiObject">Unknown</add>
-	</compound>
-	
-	<compound name="RagdollTemplateSubData2">
-		Sub-list for bhkRagdollTemplateData. (not finished)
-		<add name="Unknown Flag 4" type="int">Unknown</add>
-		<add name="Unknown Set 1" type="Vector3" cond="Unknown Flag 3 == 7" arr1="12">Unknown</add>
-		<add name="Unknown XXX 1" type="int"/>
-		<add name="Unknown XXX 1" type="int"/>
-		<add name="Unknown float 2" type="float">Unknown</add>
-		<add name="Unknown float 3" type="float">Unknown</add>
-		<add name="Unknown byte 1" type="byte">Unknown</add>		
-	</compound>
--->
+    <compound name="SubConstraint">
+        <add name="Type" type="hkConstraintType">Type of constraint.</add>
+        <add name="Num Entities" type="uint">Usually 2. Number of bodies affected by this constraint.</add>
+        <add name="Entities" type="Ptr" template="bhkEntity" arr1="Num Entities">Usually NONE. The entities affected by this constraint.</add>
+        <add name="Priority" type="uint" default="1">Usually 1. Higher values indicate higher priority of this constraint?</add>
+        <add name="Ball and Socket" type="BallAndSocketDescriptor" cond="Type == 0" />
+        <add name="Hinge" type="HingeDescriptor" cond="Type == 1" />
+        <add name="Limited Hinge" type="LimitedHingeDescriptor" cond="Type == 2" />
+        <add name="Prismatic" type="PrismaticDescriptor" cond="Type == 6" />
+        <add name="Ragdoll" type="RagdollDescriptor" cond="Type == 7" />
+        <add name="StiffSpring" type="StiffSpringDescriptor" cond="Type == 8" />
+    </compound>
+
+    <compound name="bhkRDTConstraint">
+        <add name="Type" type="uint">Type of constraint.
+        7 = RagDoll Constraint?
+        13 = Malleable Constraint?</add>
+        <add name="Unknown Int" type="uint">Unknown. Usually 2.</add>
+        <add name="Entity A" type="Ref" template="NiObject">Entity A in this constraint.</add>
+        <add name="Entity B" type="Ref" template="NiObject">Entity B in this constraint.</add>
+        <add name="Priority" type="uint" default="1">Usually 1. Higher values indicate higher priority of this constraint?</add>
+        <add name="Ragdoll" type="RagdollDescriptor" cond="Type == 7" />
+        <add name="Malleable Constraint" type="bhkRDTMalleableConstraint" cond="Type == 13" />
+    </compound>
+    <compound name="bhkRDTMalleableConstraint">
+    A malleable constraint.
+        <add name="Type" type="uint">Type of constraint.</add>
+        <add name="Unknown Int" type="uint">Unknown. Usually 2.</add>
+        <add name="Entity A" type="Ref" template="NiObject">Usually -1?</add>
+        <add name="Entity B" type="Ref" template="NiObject">Usually -1?</add>
+        <add name="Priority" type="uint" default="1">Usually 1. Higher values indicate higher priority of this constraint?</add>
+        <add name="Hinge" type="HingeDescriptor" cond="Type == 1" />
+        <add name="Ragdoll" type="RagdollDescriptor" cond="Type == 7" />
+        <add name="Limited Hinge" type="LimitedHingeDescriptor" cond="Type == 2" />
+        <add name="Damping" type="float" />
+    </compound>
 
     <!-- NIF Objects
          These are the main units of data that NIF files are arranged in.
@@ -1722,9 +2079,7 @@
     <niobject name="bhkWorldObject" abstract="1" inherit="bhkSerializable">
         Havok objects that have a position in the world?
         <add name="Shape" type="Ref" template="bhkShape"> Link to the body for this collision object.</add>
-        <add name="Layer" type="OblivionLayer" default="OL_STATIC">Sets mesh color in Oblivion Construction Set.</add>
-        <add name="Col Filter" type="byte" default="0">The first bit sets the LINK property and controls whether this body is physically linked to others. The next bit turns collision off. Then, the next bit sets the SCALED property in Oblivion. The next five bits make up the number of this part in a linked body list.</add>
-        <add name="Unknown Short" type="ushort">Unknown.</add>
+        <add name="Havok Col Filter" type="HavokColFilter" />
     </niobject>
 
     <niobject name="bhkPhantom" abstract="1" inherit="bhkWorldObject">
@@ -1758,12 +2113,11 @@
         <add name="Unknown Byte" type="byte" default="0xbe">Unknown</add>
         <add name="Process Contact Callback Delay?" type="ushort" default="0xffff">Lowers the frequency for processContactCallbacks. A value of 5 means that a callback is raised every 5th frame.</add>
         <add name="Unknown 2 Shorts" type="ushort" arr1="2" default="35899 16336">Unknown.</add>
-        <add name="Layer Copy" type="OblivionLayer" default="OL_STATIC">Copy of Layer value?</add>
-        <add name="Col Filter Copy" type="byte" default="0">Copy of Col Filter value?</add>
-        <add name="Unknown 7 Shorts" type="ushort" arr1="7" default="0 21280 2481 62977 65535 44 0">
+        <add name="Havok Col Filter Copy" type="HavokColFilter">Copy of Havok Col Filter</add>
+        <add name="Unknown 6 Shorts" type="ushort" arr1="6" default="21280 2481 62977 65535 44 0">
             Unknown.
-            Oblivion defaults: 0 21280 2481 62977 65535 44 0
-            Skyrim defaults: 0 56896 1343 0 0 1 65535 (fourth and fifth element *must* be zero)
+            Oblivion defaults: 21280 2481 62977 65535 44 0
+            Skyrim defaults: 56896 1343 0 0 1 65535 (third and fourth element *must* be zero)
         </add>
         <add name="Translation" type="Vector4"> A vector that moves the body by the specified amount. Only enabled in bhkRigidBodyT objects.</add>
         <add name="Rotation" type="QuaternionXYZW">The rotation Yaw/Pitch/Roll to apply to the body. Only enabled in bhkRigidBodyT objects.</add>
@@ -1822,23 +2176,15 @@
 
     <niobject name="bhkMalleableConstraint" abstract="0" inherit="bhkConstraint">
         A malleable constraint.
-        <add name="Type" type="uint">Type of constraint.</add>
-        <add name="Unknown Int 2" type="uint">Unknown.</add>
-        <add name="Unknown Link 1" type="Ref" template="NiObject">Usually -1?</add>
-        <add name="Unknown Link 2" type="Ref" template="NiObject">Usually -1?</add>
-        <add name="Unknown Int 3" type="uint">Unknown. 1?</add>
-        <add name="Hinge" type="HingeDescriptor" cond="Type == 1" />
-        <add name="Ragdoll" type="RagdollDescriptor" cond="Type == 7" />
-        <add name="Limited Hinge" type="LimitedHingeDescriptor" cond="Type == 2" />
-        <add name="Tau" type="float" ver2="20.0.0.5" /><!-- not in Fallout 3 -->
-        <add name="Damping" type="float" />
+        <add name="Sub Constraint" type="SubConstraint">Constraint within constraint.</add>
+        <add name="Tau" type="float" ver2="20.0.0.5" /><!-- not in Fallout 3 or Skyrim -->
+        <add name="Damping" type="float" ver2="20.0.0.5" /><!-- In TES CS described as Damping -->
+        <add name="Strength" type="float" ver1="20.2.0.7" /><!-- In GECK and Creation Kit described as Strength -->
     </niobject>
 
     <niobject name="bhkStiffSpringConstraint" abstract="0" inherit="bhkConstraint">
         A spring constraint.
-        <add name="Pivot A" type="Vector4">Pivot A.</add>
-        <add name="Pivot B" type="Vector4">Pivot B.</add>
-        <add name="Length" type="float">Length.</add>
+        <add name="StiffSpring" type="StiffSpringDescriptor">Stiff Spring constraint.</add>
     </niobject>
 
     <niobject name="bhkRagdollConstraint" abstract="0" inherit="bhkConstraint">
@@ -1848,30 +2194,7 @@
 
     <niobject name="bhkPrismaticConstraint" abstract="0" inherit="bhkConstraint">
         A prismatic constraint.
-
-        <!-- Oblivion -->
-        <add name="Pivot A" type="Vector4" ver2="20.0.0.5">Pivot A.</add>
-        <add name="Rotation Matrix A" type="Vector4" arr1="4" ver2="20.0.0.5">4x4 rotation matrix, rotates the child entity.</add>
-        <add name="Pivot B" type="Vector4" ver2="20.0.0.5">Pivot B.</add>
-        <add name="Sliding B" type="Vector4" ver2="20.0.0.5">Describes the axis the object is able to travel along. Unit vector.</add>
-        <add name="Plane B" type="Vector4" ver2="20.0.0.5">Plane normal. Describes the plane the object is able to move on.</add>
-
-        <!-- Fallout 3 -->
-        <add name="Sliding A" type="Vector4" ver1="20.2.0.7">Describes the axis the object is able to travel along. Unit vector.</add>
-        <add name="Rotation A" type="Vector4" ver1="20.2.0.7">Rotation axis.</add>
-        <add name="Plane A" type="Vector4" ver1="20.2.0.7">Plane normal. Describes the plane the object is able to move on.</add>
-        <add name="Pivot A" type="Vector4" ver1="20.2.0.7">Pivot.</add>
-        <add name="Sliding B" type="Vector4" ver1="20.2.0.7">Describes the axis the object is able to travel along in B coordinates. Unit vector.</add>
-        <add name="Rotation B" type="Vector4" ver1="20.2.0.7">Rotation axis.</add>
-        <add name="Plane B" type="Vector4" ver1="20.2.0.7">Plane normal. Describes the plane the object is able to move on in B coordinates.</add>
-        <add name="Pivot B" type="Vector4" ver1="20.2.0.7">Pivot in B coordinates.</add>
-
-        <add name="Min Distance" type="float">Describe the min distance the object is able to travel.</add>
-
-        <add name="Max Distance" type="float">Describe the max distance the object is able to travel.</add>
-        <add name="Friction" type="float" >Friction.</add>
-
-        <add name="Unknown Byte 1" type="byte" ver1="20.2.0.7" default="0">Unknown. Do not set this to anything over 0 as it will crash the game.</add>
+        <add name="Prismatic" type="PrismaticDescriptor">Describes a prismatic constraint</add>
     </niobject>
 
     <niobject name="bhkHingeConstraint" abstract="0" inherit="bhkConstraint">
@@ -1881,10 +2204,7 @@
 
     <niobject name="bhkBallAndSocketConstraint" abstract="0" inherit="bhkConstraint">
         A Ball and Socket Constraint.
-        <add name="Unknown 4 bytes" type="byte" arr1="4">Unknown</add>
-        <add name="Unknown Floats 1" type="Vector3">Unknown</add>
-        <add name="Unknown Floats 2" type="Vector3">Unknown</add>
-        <add name="Unknown Int 1" type="uint">Unknown</add>
+        <add name="Ball and Socket" type="BallAndSocketDescriptor">Describes a ball and socket constraint</add>
     </niobject>
 
     <niobject name="bhkBallSocketConstraintChain" abstract="0" inherit="bhkSerializable">
@@ -1909,8 +2229,7 @@
     <niobject name="bhkTransformShape" abstract="0" inherit="bhkShape">
         Transforms a shape.
         <add name="Shape" type="Ref" template="bhkShape">The shape that this object transforms.</add>
-        <add name="Material" type="HavokMaterial" vercond="User Version &lt; 12">The shape&#039;s material.</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial" vercond="User Version >= 12">The shape&#039;s material.</add>
+        <add name="Material" type="HavokMaterial">The material of the shape.</add>
         <add name="Unknown Float 1" type="float">Unknown.</add>
         <add name="Unknown 8 Bytes" type="byte" arr1="8">Unknown.</add>
         <add name="Transform" type="Matrix44">A transform matrix.</add>
@@ -1918,8 +2237,7 @@
 
     <niobject name="bhkSphereRepShape" abstract="1" inherit="bhkShape">
         A havok shape, perhaps with a bounding sphere for quick rejection in addition to more detailed shape data?
-        <add name="Material" type="HavokMaterial" vercond="User Version &lt; 12">The shape&#039;s material.</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial" vercond="User Version >= 12">The shape&#039;s material.</add>
+        <add name="Material" type="HavokMaterial">The material of the shape.</add>
         <add name="Radius" type="float">The radius of the sphere that encloses the shape.</add>
     </niobject>
 
@@ -1979,16 +2297,15 @@
     <niobject name="bhkMoppBvTreeShape" abstract="0" inherit="bhkBvTreeShape">
         Memory optimized partial polytope bounding volume tree shape (not an entity).
         <add name="Shape" type="Ref" template="bhkShape">The shape.</add>
-        <add name="Material" type="HavokMaterial" vercond="User Version &lt; 12">The shape&#039;s material.</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial" vercond="User Version >= 12">The shape&#039;s material.</add>
+        <add name="Unknown Int" type="uint">Unknown.</add>
         <add name="Unknown 8 Bytes" type="byte" arr1="8">Unknown bytes.</add>
         <add name="Unknown Float" type="float" default="1.0">Unknown float, might be scale.</add>
         <add name="MOPP Data Size" type="uint" calculated="1">Number of bytes for MOPP data.</add>
         <add name="Origin" type="Vector3">Origin of the object in mopp coordinates. This is the minimum of all vertices in the packed shape along each axis, minus 0.1.</add>
         <add name="Scale" type="float">The scaling factor to quantize the MOPP: the quantization factor is equal to 256*256 divided by this number. In Oblivion files, scale is taken equal to 256*256*254 / (size + 0.2) where size is the largest dimension of the bounding box of the packed shape.</add>
         <add name="Old MOPP Data" ver2="10.0.1.0" type="byte" nifskopetype="blob" arr1="MOPP Data Size - 1">The tree of bounding volume data (old style, contains more than just the mopp script).</add>
+        <add name="Build Type" type="MoppDataBuildType" ver1="20.2.0.7" vercond="User Version >= 12">Tells if MOPP Data was organized into smaller chunks (PS3) or not (PC)</add>
         <add name="MOPP Data" ver1="10.0.1.2" type="byte" nifskopetype="blob" arr1="MOPP Data Size">The tree of bounding volume data.</add>
-        <add name="Unknown Byte 1" type="byte" ver1="20.2.0.7" vercond="User Version >= 12">Unknown</add>
     </niobject>
 
 
@@ -2006,8 +2323,7 @@
         walking noise, so only use it for non-walkable objects.
         <add name="Num Sub Shapes" type="uint">The number of sub shapes referenced.</add>
         <add name="Sub Shapes" type="Ref" template="bhkShape" arr1="Num Sub Shapes">List of shapes.</add>
-        <add name="Material" type="HavokMaterial" vercond="User Version &lt; 12">The shape&#039;s material.</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial" vercond="User Version >= 12">The shape&#039;s material.</add>
+        <add name="Material" type="HavokMaterial">The material of the shape.</add>
         <add name="Unknown Floats" type="float" arr1="6">Unknown. Set to (0.0,0.0,-0.0,0.0,0.0,-0.0), where -0.0 is 0x80000000 in hex.</add>
         <add name="Num Unknown Ints" type="uint">Count.</add>
         <add name="Unknown Ints" type="uint" arr1="Num Unknown Ints">Unknown.</add>
@@ -2048,8 +2364,7 @@
 
     <niobject name="bhkNiTriStripsShape" abstract="0" inherit="bhkShapeCollection">
         A shape constructed from a bunch of strips.
-        <add name="Material" type="HavokMaterial" vercond="User Version &lt; 12">The shape&#039;s material.</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial" vercond="User Version >= 12">The shape&#039;s material.</add>
+        <add name="Material" type="HavokMaterial">The material of the shape.</add>
         <add name="Unknown Float 1" type="float" default="0.1">Unknown.</add>
         <add name="Unknown Int 1" type="uint" default="0x004ABE60">Unknown.</add>
         <add name="Unknown Ints 1" type="uint" arr1="4">Unknown.</add>
@@ -2059,7 +2374,7 @@
         <add name="Num Strips Data" type="uint">The number of strips data objects referenced.</add>
         <add name="Strips Data" type="Ref" template="NiTriStripsData" arr1="Num Strips Data">Refers to a bunch of NiTriStripsData objects that make up this shape.</add>
         <add name="Num Data Layers" type="uint">Number of Havok Layers, equal to Number of strips data objects.</add>
-        <add name="Data Layers" type="OblivionColFilter" arr1="Num Data Layers">Havok Layers for each strip data.</add>
+        <add name="Data Layers" type="HavokColFilter" arr1="Num Data Layers">Havok Layers for each strip data.</add>
     </niobject>
 
     <niobject name="NiExtraData" abstract="1" inherit="NiObject">
@@ -2167,7 +2482,7 @@
     <niobject name="bhkNiCollisionObject" abstract="1" inherit="NiCollisionObject">
         Havok related collision object?
         <add name="Flags" type="Flags" default="1">
-            Set to 1 for most objects, and to 41 for animated objects (OL_ANIM_STATIC). Bits: 0=Active 2=Notify 3=Set Local 6=Reset.
+            Set to 1 for most objects, and to 41 for animated objects (ANIM_STATIC). Bits: 0=Active 2=Notify 3=Set Local 6=Reset.
         </add>
         <add name="Body" type="Ref" template="NiObject">Links to the collision object data</add>
     </niobject>
@@ -2503,13 +2818,15 @@
         <add name="Compress Flags" type="byte" ver1="10.1.0.0">Unknown.</add>
         <add name="Has Vertices" type="bool" default="1">Is the vertex array present? (Always non-zero.)</add>
         <add name="Vertices" type="Vector3" arr1="Num Vertices" cond="Has Vertices">The mesh vertices.</add>
-        <add name="Num UV Sets" type="ushort" vercond="((Version >= 10.0.1.0) &amp;&amp; (!((Version >= 20.2.0.7) &amp;&amp; (User Version >= 11))))" calculated="1">Flag for tangents and bitangents in upper byte. Texture flags in lower byte.</add>
-        <add name="BS Num UV Sets" type="ushort" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 11))" calculated="1">Bethesda's version of this field for nif versions 20.2.0.7 and up. Only a single bit denotes whether uv's are present. For example, see meshes/architecture/megaton/megatonrampturn45sml.nif in Fallout 3.</add>
-        <add name="Unknown Int 2" type="uint" ver1="20.2.0.7" userver="12" cond="!NiPSysData">Unknown, seen in Skyrim.</add>	
+        <add name="Num UV Sets" type="byte" vercond="Version >= 10.0.1.0" calculated="1">Number of UV texture sets.
+
+        	Fallout3/Skyrim: can't be higher than 1.</add>
+        <add name="Extra Vectors Flags" type="ExtraVectorsFlags" vercond="Version >= 10.0.1.0">Bit 4: Has Tangents/Bitangents</add>
+        <add name="Unknown Int 2" type="uint" ver1="20.2.0.7" userver="12" cond="!NiPSysData">Unknown, seen in Skyrim.</add>
         <add name="Has Normals" type="bool">Do we have lighting normals? These are essential for proper lighting: if not present, the model will only be influenced by ambient light.</add>
         <add name="Normals" type="Vector3" arr1="Num Vertices" cond="Has Normals">The lighting normals.</add>
-        <add name="Tangents" type="Vector3" arr1="Num Vertices" cond="(Has Normals) &amp;&amp; ((Num UV Sets &amp; 61440) || (BS Num UV Sets &amp; 61440))" ver1="10.1.0.0">Tangent vectors.</add>
-        <add name="Bitangents" type="Vector3" arr1="Num Vertices" cond="(Has Normals) &amp;&amp; ((Num UV Sets &amp; 61440) || (BS Num UV Sets &amp; 61440))" ver1="10.1.0.0">Bitangent vectors.</add>
+        <add name="Tangents" type="Vector3" arr1="Num Vertices" cond="(Has Normals) &amp;&amp; (Extra Vectors Flags &amp; 16)" ver1="10.1.0.0">Tangent vectors.</add>
+        <add name="Bitangents" type="Vector3" arr1="Num Vertices" cond="(Has Normals) &amp;&amp; (Extra Vectors Flags &amp; 16)" ver1="10.1.0.0">Bitangent vectors.</add>
         <add name="Center" type="Vector3">Center of the bounding box (smallest box that contains all vertices) of the mesh.</add>
         <add name="Radius" type="float">Radius of the mesh: maximal Euclidean distance between the center and all vertices.</add>
         <add name="Unknown 13 shorts" type="short" arr1="13" ver1="20.3.0.9" ver2="20.3.0.9" userver="131072">Unknown, always 0?</add>
@@ -2527,7 +2844,7 @@
 
             Note: for compatibility with NifTexture, set this value to either 0x00000000 or 0xFFFFFFFF.
         </add>
-        <add name="UV Sets" type="TexCoord" arr1="(Num UV Sets &amp; 63) | (BS Num UV Sets &amp; 1)" arr2="Num Vertices">The UV texture coordinates. They follow the OpenGL standard: some programs may require you to flip the second coordinate.</add>
+        <add name="UV Sets" type="TexCoord" arr1="(Num UV Sets &amp; 63)" arr2="Num Vertices">The UV texture coordinates. They follow the OpenGL standard: some programs may require you to flip the second coordinate.</add>
         <add name="Consistency Flags" type="ConsistencyType" ver1="10.0.1.0" default="CT_MUTABLE" vercond="User Version &lt; 12">Consistency Flags</add>
         <add name="Consistency Flags" type="ConsistencyType" ver1="10.0.1.0" default="CT_MUTABLE" vercond="User Version >= 12" cond="!NiPSysData">Consistency Flags</add>
         <add name="Additional Data" type="Ref" template="AbstractAdditionalGeometryData" ver1="20.0.0.4" vercond="User Version &lt; 12">Unknown.</add>
@@ -2680,7 +2997,7 @@
         <add name="Has Subtexture Offset UVs" type="bool" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Boolean for Num Subtexture Offset UVs</add>
         <add name="Num Subtexture Offset UVs" type="uint" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">How many quads to use in BSPSysSubTexModifier for texture atlasing</add>
         <add name="Aspect Ratio" type="float" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Sets aspect ratio for Subtexture Offset UV quads</add>
-        <add name="Subtexture Offset UVs" type="Vector4" arr1="Num Subtexture Offset UVs" cond="Has Subtexture Offset UVs == 1" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Defines UV offsets</add>
+        <add name="Subtexture Offset UVs" type="Vector4" arr1="Num Subtexture Offset UVs" cond="Has Subtexture Offset UVs" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Defines UV offsets</add>
         <add name="Unknown Int 4" type="uint" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Unknown</add>
         <add name="Unknown Int 5" type="uint" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Unknown</add>
         <add name="Unknown Int 6" type="uint" vercond="((Version >= 20.2.0.7) &amp;&amp; (User Version >= 12))">Unknown</add>
@@ -4423,37 +4740,74 @@
         <option value="30" name="SF_Shadow_Map">Shadow Map</option>
         <option value="31" name="SF_ZBuffer_Test">ZBuffer Test (1=on)</option>
     </bitflags>
+
+    <bitflags name="BSShaderFlags2" storage="uint">
+        Shader Property Flags 2
+        <option value="0" name="SF2_ZBuffer_Write">ZBuffer Write</option>
+        <option value="1" name="SF2_LOD_Landscape">LOD Landscape</option>
+        <option value="2" name="SF2_LOD_Building">LOD Building</option>
+        <option value="3" name="SF2_No_Fade">No Fade</option>
+        <option value="4" name="SF2_Refraction_Tint">Refraction Tint</option>
+        <option value="5" name="SF2_Vertex_Colors">Has Vertex Colors</option>
+        <option value="6" name="SF2_Unknown1">Unknown</option>
+        <option value="7" name="SF2_1st_Light_is_Point_Light">1st Light is Point Light</option>
+        <option value="8" name="SF2_2nd_Light">2nd Light</option>
+        <option value="9" name="SF2_3rd_Light">3rd Light</option>
+        <option value="10" name="SF2_Vertex_Lighting">Vertex Lighting</option>
+        <option value="11" name="SF2_Uniform_Scale">Uniform Scale</option>
+        <option value="12" name="SF2_Fit_Slope">Fit Slope</option>
+        <option value="13" name="SF2_Billboard_and_Envmap_Light_Fade">Billboard and Envmap Light Fade</option>
+        <option value="14" name="SF2_No_LOD_Land_Blend">No LOD Land Blend</option>
+        <option value="15" name="SF2_Envmap_Light_Fade">Envmap Light Fade</option>
+        <option value="16" name="SF2_Wireframe">Wireframe</option>
+        <option value="17" name="SF2_VATS_Selection">VATS Selection</option>
+        <option value="18" name="SF2_Show_in_Local_Map">Show in Local Map</option>
+        <option value="19" name="SF2_Premult_Alpha">Premult Alpha</option>
+        <option value="20" name="SF2_Skip_Normal_Maps">Skip Normal Maps</option>
+        <option value="21" name="SF2_Alpha_Decal">Alpha Decal</option>
+        <option value="22" name="SF2_No_Transparecny_Multisampling">No Transparency MultiSampling</option>
+        <option value="23" name="SF2_Unknown2">Unknown</option>
+        <option value="24" name="SF2_Unknown3">Unknown</option>
+        <option value="25" name="SF2_Unknown4">Unknown</option>
+        <option value="26" name="SF2_Unknown5">Unknown</option>
+        <option value="27" name="SF2_Unknown6">Unknown</option>
+        <option value="28" name="SF2_Unknown7">Unknown</option>
+        <option value="29" name="SF2_Unknown8">Unknown</option>
+        <option value="30" name="SF2_Unknown9">Unknown</option>
+        <option value="31" name="SF2_Unknown10">Unknown</option>
+    </bitflags>
     
     <niobject name="BSShaderProperty" abstract="0" inherit="NiProperty">
         Bethesda-specific Property node
-        <add name="Flags" type="Flags" default="1">Unknown</add>
+        <add name="Smooth" type="Flags" default="1">Unknown.
+            0: smooth no
+            1: smooth yes
+        </add>
         <add name="Shader Type" type="BSShaderType" default="SHADER_DEFAULT">Unknown (Set to 0x21 for NoLighting, 0x11 for Water)</add>
         <add name="Shader Flags" type="BSShaderFlags" default="0x82000000">Shader Property Flags</add>
-        <add name="Unknown Int 2" type="int" default="1">Unknown</add>
-        <add name="Envmap Scale" type="float" default="1.0" vercond="User Version == 11">Unknown</add>
+        <add name="Shader Flags 2" type="BSShaderFlags2" default="1">Shader Property Flags 2</add>
+        <add name="Environment Map Scale" type="float" default="1.0" vercond="User Version == 11">Scales the intensity of the environment/cube map.</add>
     </niobject>
 
     <niobject name="BSShaderLightingProperty" abstract="1" inherit="BSShaderProperty">
         Bethesda-specific property.
-        <add name="Unknown Int 3" type="int" default="3" vercond="User Version &lt;= 11">Unknown</add>
+        <add name="Texture Clamp Mode" type="TexClampMode" default="3" vercond="User Version &lt;= 11">How to handle texture borders.</add>
     </niobject>
 
     <niobject name="BSShaderNoLightingProperty" abstract="0" inherit="BSShaderLightingProperty">
         Bethesda-specific property.
         <add name="File Name" type="SizedString">The texture glow map.</add>
-        <add name="Unknown Float 2" type="float" default="1.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">Unknown</add>
-        <add name="Unknown Float 3" type="float" default="0.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">
-            Normally what appears to be a junk value (0xB33BBD2E). Appears to be related to glow when Unk Flags is (0x82000148).
-        </add>
-        <add name="Unknown Float 4" type="float" default="1.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">Unknown</add>
-        <add name="Unknown Float 5" type="float" default="0.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">Unknown</add>
+        <add name="Falloff Start Angle" type="float" default="1.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">At this cosine of angle falloff will be equal to Falloff Start Opacity</add>
+        <add name="Falloff Stop Angle" type="float" default="0.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">At this cosine of angle falloff will be equal to Falloff Stop Opacity</add>
+        <add name="Falloff Start Opacity" type="float" default="1.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">Alpha falloff multiplier at start angle</add>
+        <add name="Falloff Stop Opacity" type="float" default="0.0" vercond="(User Version >= 11) &amp;&amp; (User Version 2 &gt; 26)">Alpha falloff multiplier at end angle</add>
     </niobject>
 
     <niobject name="BSShaderPPLightingProperty" abstract="0" inherit="BSShaderLightingProperty">
         Bethesda-specific Shade node.
         <add name="Texture Set" type="Ref" template="BSShaderTextureSet">Texture Set</add>
-        <add name="Unknown Float 2" type="float" default="0.0" vercond="(User Version == 11) &amp;&amp; (User Version 2 &gt; 14)">Unknown</add>
-        <add name="Refraction Period" type="int" default="0" vercond="(User Version == 11) &amp;&amp; (User Version 2 &gt; 14)">Rate of texture movement for refraction shader.</add>
+        <add name="Refraction Strength" type="float" default="0.0" vercond="(User Version == 11) &amp;&amp; (User Version 2 &gt; 14)">The amount of distortion. **Not based on physically accurate refractive index** (0=none) (0-1)</add>
+        <add name="Refraction Fire Period" type="int" default="0" vercond="(User Version == 11) &amp;&amp; (User Version 2 &gt; 14)">Rate of texture movement for refraction shader.</add>
         <add name="Unknown Float 4" type="float" default="4.0" vercond="(User Version == 11) &amp;&amp; (User Version 2 &gt; 24)">Unknown</add>
         <add name="Unknown Float 5" type="float" default="1.0" vercond="(User Version == 11) &amp;&amp; (User Version 2 &gt; 24)">Unknown</add>
         <add name="Emissive Color" type="Color4" vercond="User Version >= 12">Glow color and alpha</add>
@@ -4461,36 +4815,23 @@
 
     <!-- Skyrim specific Node -->
     <niobject name="BSEffectShaderPropertyFloatController" abstract="0" inherit="NiFloatInterpController">
-    This controller is used to animate variables in BSEffectShaderPropertyFloatController, target is a number in order they appear:
-    0: Visibility?
-    1: 
-    2: 
-    3: 
-    4: Emissive or Saturation?
-    5: Alpha Transparency
-    6: U Offset
-    7: U Scale
-    8: V Offset
-    9: V Scale
-        <add name="Target Variable" type="uint">Unknown</add>
+    This controller is used to animate float variables in BSEffectShaderProperty.
+        <add name="Type of Controlled Variable" type="EffectShaderControlledVariable">Which float variable in BSEffectShaderProperty to animate:</add>
     </niobject>
 	
 	<niobject name="BSEffectShaderPropertyColorController" inherit="NiFloatInterpController">
-    Unkown
-		<add name="Unknown Int 1" type="uint">Unknown</add>
+    This controller is used to animate colors in BSEffectShaderProperty.
+		<add name="Type of Controlled Color" type="EffectShaderControlledColor">Which color in BSEffectShaderProperty to animate:</add>
 	</niobject>
 	
 	<niobject name="BSLightingShaderPropertyFloatController" abstract="0" inherit="NiFloatInterpController">
-    This controller is used to animate variables in BSLightingShaderPropertyFloatController, target is a number in order they appear:
-    5: U Offset
-    6: V Offset
-    7: U Scale
-    8: V Scale
-		<add name="Target Variable" type="uint">Which variable in the shader to animate.</add>
+    This controller is used to animate float variables in BSLightingShaderProperty.
+		<add name="Type of Controlled Variable" type="LightingShaderControlledVariable">Which float variable in BSLightingShaderProperty to animate:</add>
 	</niobject>
 	
 	<niobject name="BSLightingShaderPropertyColorController" abstract="0" inherit="NiFloatInterpController">
-		<add name="Target Variable" type="uint">Which variable in the shader to animate.</add>
+    This controller is used to animate colors in BSLightingShaderProperty.
+		<add name="Type of Controlled Color" type="LightingShaderControlledColor">Which color in BSLightingShaderProperty to animate:</add>
 	</niobject>	
 	
 	<niobject name="BSNiAlphaPropertyTestRefController" inherit="NiAlphaController">
@@ -4528,10 +4869,12 @@
         <add name="Textures" type="SizedString" arr1="Num Textures">Textures.
             0: Diffuse
             1: Normal/Gloss
-            2: Glow/Skin/Hair
+            2: Glow(SLSF2_Glow_Map)/Skin/Hair/Rim light(SLSF2_Rim_Lighting)
             3: Height/Parallax
             4: Environment
             5: Environment Mask
+            6: Subsurface for Multilayer Parallax
+            7: Back Lighting Map (SLSF2_Back_Lighting)
         </add>
     </niobject>
 
@@ -4539,11 +4882,19 @@
         Bethesda-specific node? Found in Fallout3
     </niobject>
 
-    <niobject name="SkyShaderProperty" abstract="0" inherit="BSShaderProperty">
+    <enum name="SkyObjectType" storage="uint">
+        Sets what sky function this object fulfills in BSSkyShaderProperty or SkyShaderProperty.
+        <option value="0" name="BSSM_SKY_TEXTURE">BSSM_Sky_Texture</option>
+        <option value="1" name="BSSM_SKY_SUNGLARE">BSSM_Sky_Sunglare</option>
+        <option value="2" name="BSSM_SKY">BSSM_Sky</option>
+        <option value="3" name="BSSM_SKY_CLOUDS">BSSM_Sky_Clouds</option>
+        <option value="5" name="BSSM_SKY_STARS">BSSM_Sky_Stars</option>
+        <option value="7" name="BSSM_SKY_MOON_STARS_MASK">BSSM_Sky_Moon_Stars_Mask</option>
+    </enum>
+    <niobject name="SkyShaderProperty" abstract="0" inherit="BSShaderLightingProperty">
         Bethesda-specific node? Found in Fallout3
-        <add name="Unknown Int 4" type="int">Unknown</add>
         <add name="File Name" type="SizedString">The texture.</add>
-        <add name="Unknown Int 5" type="int" default="3">Unknown</add>
+        <add name="Sky Object Type" type="SkyObjectType">Sky Object Type</add>
     </niobject>
 
     <niobject name="TileShaderProperty" abstract="0" inherit="BSShaderLightingProperty">
@@ -4658,14 +5009,14 @@
         <add name="Emissive Color" type="Color3">Glow color and alpha</add>
         <add name="Emissive Multiple" type="float">Multiplied emissive colors</add>
         <add name="Texture Clamp Mode" type="TexClampMode">How to handle texture borders.</add>
-        <add name="Alpha" type="float" default="1.0">The materials opacity (1=non-transparent).</add>
-        <add name="Unknown Float 2" type="float">Unknown</add>
+        <add name="Alpha" type="float" default="1.0">The material&#039;s opacity (1=non-transparent).</add>
+        <add name="Refraction Strength" type="float">The amount of distortion. **Not based on physically accurate refractive index** (0=none) (0-1)</add>
         <add name="Glossiness" type="float">The material&#039;s specular power, or glossiness (0-999).</add>
         <add name="Specular Color" type="Color3">Adds a colored highlight.</add>
         <add name="Specular Strength" type="float" default="1.0">Brightness of specular highlight. (0=not visible) (0-999)</add>
         <add name="Lighting Effect 1" type="float">Controls strength for envmap/backlight/rim/softlight lighting effect?</add>
         <add name="Lighting Effect 2" type="float">Controls strength for envmap/backlight/rim/softlight lighting effect?</add>
-        <add name="Environment Map Scale" type="float" cond="Skyrim Shader Type == 1">Scales the environment/cube map. (0-??)</add>
+        <add name="Environment Map Scale" type="float" cond="Skyrim Shader Type == 1">Scales the intensity of the environment/cube map. (0-1)</add>
         <add name="Skin Tint Color" type="Color3" cond="Skyrim Shader Type == 5">Tints the base texture. Overridden by game settings.</add>
         <add name="Hair Tint Color" type="Color3" cond="Skyrim Shader Type == 6">Tints the base texture. Overridden by game settings.</add>
         <add name="Max Passes" type="float" cond="Skyrim Shader Type == 7">Max Passes</add>
@@ -4681,7 +5032,7 @@
     </niobject>
 
     <niobject name="BSEffectShaderProperty" abstract="0" inherit="NiProperty">
-        Skyrim non-PP shader model, used primarily for transparency effects.
+        Skyrim non-PP shader model, used primarily for transparency effects, often as decal.
         <add name="Shader Flags 1" type="SkyrimShaderPropertyFlags1"></add>
         <add name="Shader Flags 2" type="SkyrimShaderPropertyFlags2"></add>
         <add name="UV Offset" type="TexCoord">Offset UVs</add>
@@ -4689,14 +5040,14 @@
         <add name="Source Texture"  type="SizedString">points to an external texture.</add>
         <add name="Texture Clamp Mode" type="uint">How to handle texture borders.</add>
         <!-- Seems to behave the same as in LightingShader, but needs flags instead? -->
-        <add name="Falloff Start Angle" type="float" default="1.0"></add>
-        <add name="Falloff Stop Angle" type="float" default="1.0"></add>
-        <add name="Falloff Start Opacity" type="float">Texture will fade in within this proximity.</add>
-        <add name="Falloff Stop Opacity" type="float"></add>
+        <add name="Falloff Start Angle" type="float" default="1.0">At this cosine of angle falloff will be equal to Falloff Start Opacity</add>
+        <add name="Falloff Stop Angle" type="float" default="1.0">At this cosine of angle falloff will be equal to Falloff Stop Opacity</add>
+        <add name="Falloff Start Opacity" type="float">Alpha falloff multiplier at start angle</add>
+        <add name="Falloff Stop Opacity" type="float">Alpha falloff multiplier at end angle</add>
         <add name="Emissive Color" type="Color4">Emissive color</add>
-        <add name="Emissive Multiple" type="float">Multipled Emissive Colors</add>
+        <add name="Emissive Multiple" type="float">Multiplier for Emissive Color (RGB part)</add>
         <add name="Soft Falloff Depth" type="float"></add>
-        <add name="Greyscale Texture"  type="SizedString">points to an external texture.</add>
+        <add name="Greyscale Texture"  type="SizedString">Points to an external texture, used as palette for SLSF1_Greyscale_To_PaletteColor/SLSF1_Greyscale_To_PaletteAlpha.</add>
     </niobject>
     
     <bitflags name="SkyrimWaterShaderFlags" storage="byte">
@@ -4722,15 +5073,6 @@
         <add name="Unknown Short 3" type="ushort">Unknown, flag?</add>  
     </niobject>
     
-    <enum name="SkyObjectType" storage="uint">
-        Skyrim, sets what sky function this object fulfills in BSSkyShaderProperty.
-        <option value="0" name="BSSM_SKY_TEXTURE">BSSM_Sky_Texture</option>
-        <option value="1" name="BSSM_SKY_SUNGLARE">BSSM_Sky_Sunglare</option>
-        <option value="2" name="BSSM_SKY">BSSM_Sky</option>
-        <option value="3" name="BSSM_SKY_CLOUDS">BSSM_Sky_Clouds</option>
-        <option value="5" name="BSSM_SKY_STARS">BSSM_Sky_Stars</option>
-        <option value="7" name="BSSM_SKY_MOON_STARS_MASK">BSSM_Sky_Moon_Stars_Mask</option>
-    </enum>
     <niobject name="BSSkyShaderProperty" inherit="NiProperty">
         Skyrim Sky shader block.
         <add name="Shader Flags 1" type="SkyrimShaderPropertyFlags1"></add>
@@ -4861,8 +5203,7 @@
         walking noise, so only use it for non-walkable objects.
         <add name="Num Sub Shapes" type="uint">The number of sub shapes referenced.</add>
         <add name="Sub Shapes" type="Ref" template="bhkConvexShape" arr1="Num Sub Shapes">List of shapes.</add>
-        <add name="Material" type="HavokMaterial" vercond="User Version &lt; 12">The shape&#039;s material.</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial" vercond="User Version >= 12">The shape&#039;s material.</add>
+        <add name="Material" type="HavokMaterial">The material of the shape.</add>
         <add name="Unknown Floats" type="float" arr1="6" default="0.0 0.0 -0.0 0.0 0.0 -0.0">Unknown. Set to (0.0,0.0,-0.0,0.0,0.0,-0.0), where -0.0 is 0x80000000 in hex.</add>
         <add name="Unknown Byte 1" type="byte" >Unknown Flag</add>
         <add name="Unknown Float 1" type="float">Unknown Flag</add>
@@ -5025,20 +5366,10 @@
     </niobject>
 
     <niobject name="bhkBreakableConstraint" abstract="0" inherit="bhkConstraint">
-        Bethesda-Specific node.
-        <add name="Unknown Ints 1" type="int" arr1="41" vercond="User Version &lt;= 11"> </add>
-        <add name="Unknown Short 1" type="short" vercond="User Version &lt;= 11">Unknown</add>
-		<add name="Unknown Int 1" type="uint" vercond="User Version == 12">A count or flag?</add>
-		<add name="Num Entities 2" type="uint" vercond="User Version == 12">Number of bodies affected by this constraint.</add>
-        <add name="Entities 2" type="Ptr" template="bhkEntity" arr1="Num Entities 2" vercond="User Version == 12">The entities affected by this constraint.</add>
-        <add name="Priority 2" type="uint" default="1" vercond="User Version == 12">Usually 1. Higher values indicate higher priority of this constraint?</add>
-        <add name="Unknown Int 2" type="uint" vercond="User Version == 12">Unknown</add>
-        <add name="Position" type="Vector3" vercond="User Version == 12">Unknown</add>
-        <add name="Rotation" type="Vector3" vercond="User Version == 12">Unknown</add>
-        <add name="Unknown Int 3" type="uint" vercond="User Version == 12">Unknown</add>
-        <add name="Threshold" type="float" vercond="User Version == 12">Unknown</add>
-        <add name="Unknown Float 1" type="float" cond="Unknown Int 1 >= 1" vercond="User Version == 12">Unknown</add>
-        <add name="Remove if Broken" type="byte" vercond="User Version == 12">Unknown</add>
+        A breakable constraint.
+        <add name="Sub Constraint" type="SubConstraint">Constraint within constraint.</add>
+        <add name="Threshold" type="float">Amount of force to break the rigid bodies apart?</add>
+        <add name="Remove if Broken" type="bool">Unknown</add>
     </niobject>
 
     <niobject name="bhkOrientHingedBodyAction" abstract="0" inherit="bhkSerializable">
@@ -5055,25 +5386,29 @@
         <add name="Num Poses" type="int">Unknown</add>
 		<add name="Pose Array" type="BonePoseArray" arr1="Num Poses">Unknown</add>
 	</niobject>
-
-	<niobject name="bhkRagdollTemplate" inherit="NiObject">
-		Found in Fallout 3, more ragdoll info?  (meshes\ragdollconstraint\*.rdt)
-		<add name="Name" type="string"/>
-		<add name="Num Bones" type="int">Number of target bones</add>
-		<add name="Bones" type="Ref" template="NiObject" arr1="Num Bones">Bones in index</add>
-	</niobject>
-	<niobject name="bhkRagdollTemplateData" inherit="NiObject">
-		Data for bhkRagdollTemplate
-		<add name="Name" type="string"/>
-		<add name="Unknown float 1" type="float" >Unknown</add>
-		<add name="Translation" type="Vector3">Unknown</add>
-		<add name="Unknown int 1" type="int" >Unknown</add>
-		<add name="Unknown Flag 1" type="Flags">Unknown</add>
-		<add name="Unknown Flag 2" type="Flags">Unknown</add>
-		<add name="Unknown Set 1" type="RagdollTemplateSubData1" cond="Unknown int 1 == 7 ">Unknown</add>
-		<add name="Unknown Set 2" type="RagdollTemplateSubData2" cond="Unknown Flag 1 != 0">Unknown</add>
-	</niobject>
 -->	
+    <niobject name="bhkRagdollTemplate" inherit="NiObject">
+        Found in Fallout 3, more ragdoll info?  (meshes\ragdollconstraint\*.rdt)
+        <add name="Name" type="string"/>
+        <add name="Num Bones" type="int">Number of target bones</add>
+        <add name="Bones" type="Ref" template="NiObject" arr1="Num Bones">Bones in index</add>
+    </niobject>
+
+    <niobject name="bhkRagdollTemplateData" inherit="NiObject">
+        Data for bhkRagdollTemplate
+        <add name="Name" type="string"/>
+        <add name="Mass?" type="float">Probably a Mass for bhkRigidBody linked to this bone node.</add>
+        <add name="Restitution?" type="float">Probably a Restitution for bhkRigidBody linked to this bone node.</add>
+        <add name="Friction?" type="float">Probably a Friction for bhkRigidBody linked to this bone node.</add>
+        <add name="Radius?" type="float">Probably a Radius for collision object shape of bhkRigidBody linked to this bone node.</add>
+        <add name="Unknown Int" type="uint">Unknown. Dependent on value of User Version 2?
+        Value 7 found in Fallout3 meshes\ragdollconstraint\default.rdt. This file has User Version 2 = 34.
+        Value 0 found in Fallout3 meshes\ragdollconstraint\stiff.rdt. This file has User Version 2 = 16.</add>
+        <add name="Flag or Num Constraints?" type="uint">Either a flag or a number of constraints.
+        0: no Constraint is present.
+        1: a Constraint is present.</add>
+        <add name="Constraint" type="bhkRDTConstraint" cond="Flag or Num Constraints? != 0">Unknown</add>
+    </niobject>
 
     <compound name="Region">
         A range of indices, which make up a region (such as a submesh).
@@ -5359,7 +5694,7 @@
         <add name="Num Bones" type="uint">The number of bones referenced by this mesh modifier.</add>
         <add name="Bones" type="Ptr" template="NiAVObject" arr1="Num Bones">Pointers to the bone nodes that affect this skin.</add>
         <add name="Bone Transforms" type="SkinTransform" arr1="Num Bones">The transforms that go from bind-pose space to bone space.</add><!-- Skin To Bone Transforms -->
-        <add name="Bone Bounds" type="SphereBV" cond="Flags &amp; 2" arr1="Num Bones">The bounds of the bones.  Only stored if the RECOMPUTE_BOUNDS bit is set.</add> <!-- Note, "SphereBV" is actually "NiBound."-->
+        <add name="Bone Bounds" type="SphereBV" cond="(Flags &amp; 2)!=0" arr1="Num Bones">The bounds of the bones.  Only stored if the RECOMPUTE_BOUNDS bit is set.</add> <!-- Note, "SphereBV" is actually "NiBound."-->
     </niobject>
 
     <niobject name="NiInstancingMeshModifier" inherit="NiMeshModifier">
@@ -5809,10 +6144,10 @@
     <niobject name="bhkCompressedMeshShape" inherit="bhkShape">
         Compressed collision mesh.
         <add name="Target" type="Ptr" template="NiAVObject">Points to root node?</add>
-        <add name="Skyrim Material" type="SkyrimHavokMaterial">The shape&#039;s material.</add>
+        <add name="Unknown Int 1" type="uint">Unknown.</add>
         <add name="Unknown Float 1" type="float">Unknown.</add>
         <add name="Unknown 4 Bytes" type="byte" arr1="4">Unknown.</add>
-		<add name="Unknown Floats 1" type="Vector4">Unknown</add>
+	<add name="Unknown Floats 1" type="Vector4">Unknown</add>
         <add name="Radius" type="float">A shell with that radius is added around the shape.</add>
         <add name="Scale" type="float">Scale</add>
         <add name="Unknown Float 3" type="float">Unknown</add>
